@@ -38,7 +38,7 @@ const AppContent = () => {
       {/* ✅ ADMIN NAVBAR (STICKY & ALWAYS VISIBLE) */}
       {isAdminRoute && <AdminNavbar />}
 
-      <main className="flex-grow pt-28">
+      <main className={`flex-grow ${isAdminRoute ? "pt-28" : ""}`}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/courses" element={<CoursesPage />} />
