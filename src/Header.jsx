@@ -29,9 +29,10 @@ const Header = () => {
             alt="CWIT Logo"
             className="object-contain w-20 h-20 drop-shadow-md"
           />
-          <span className="text-2xl font-extrabold tracking-tight text-blue-700">
-            CODE WEB IT
+          <span className="text-xl font-extrabold tracking-tight text-blue-700 flex align-text-bottom text-uppercase">
+CODEWEB INSTITUTE OF TECHNOLOGY
           </span>
+          
         </NavLink>
 
         {/* DESKTOP NAV */}

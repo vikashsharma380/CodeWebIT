@@ -1,176 +1,221 @@
-import React, { useState } from "react";
+import "./certificate.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useRef } from "react";
 
-export default function CertificateGenerator() {
-  const [form, setForm] = useState({
-    certNo: "",
-    date: "",
-    student: "",
-    course: "",
-    grade: "",
-    period: "",
-  });
+export default function Certificate() {
+  const certRef = useRef();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const downloadImage = async () => {
-    const element = document.getElementById("certificate-preview");
-    const canvas = await html2canvas(element, { scale: 3 });
-    const imgData = canvas.toDataURL("image/png");
+  // ✅ PNG DOWNLOAD
+  const downloadPNG = async () => {
+    const canvas = await html2canvas(certRef.current, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
 
     const link = document.createElement("a");
-    link.href = imgData;
     link.download = "certificate.png";
+    link.href = canvas.toDataURL("image/png");
     link.click();
   };
 
+  // ✅ PDF DOWNLOAD (PORTRAIT)
   const downloadPDF = async () => {
-    const element = document.getElementById("certificate-preview");
-    const canvas = await html2canvas(element, { scale: 3 });
+    const canvas = await html2canvas(certRef.current, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
     const imgData = canvas.toDataURL("image/png");
 
-    const pdf = new jsPDF("p", "px", [1527, 1080]);
-    pdf.addImage(imgData, "PNG", 0, 0, 1080, 1527);
+    const pdf = new jsPDF("portrait", "mm", "a4");
+    const pdfWidth = 210;
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("certificate.pdf");
   };
 
   return (
-    <div className="flex gap-10 p-10">
-      {/* LEFT FORM */}
-      <div className="w-1/3 space-y-5">
-        {[
-          ["certNo", "Certificate Number"],
-          ["date", "Date of Issue"],
-          ["student", "Student Name"],
-          ["course", "Course Name"],
-          ["grade", "Grade"],
-          ["period", "Course Period"],
-        ].map(([name, label]) => (
-          <div key={name}>
-            <label className="block mb-1 font-medium">{label}</label>
-            <input
-              type="text"
-              name={name}
-              value={form[name]}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-            />
-          </div>
-        ))}
+    <div className="certificate-wrapper">
 
-        <button
-          onClick={downloadImage}
-          className="w-full px-6 py-2 text-white bg-blue-600 rounded"
-        >
-          Download PNG
-        </button>
-
-        <button
-          onClick={downloadPDF}
-          className="w-full px-6 py-2 text-white bg-green-600 rounded"
-        >
+      {/* BUTTONS */}
+      <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
+        <button onClick={downloadPDF} style={btnStyle}>
           Download PDF
+        </button>
+        <button onClick={downloadPNG} style={{ ...btnStyle, marginLeft: 10 }}>
+          Download PNG
         </button>
       </div>
 
-      {/* RIGHT — LIVE PREVIEW */}
-      <div
-        id="certificate-preview"
-        style={{
-          position: "relative",
-          width: "540px", // preview size (half of 1080x1527)
-          height: "763px",
-          backgroundImage: "url('/certificate-template.png')",
-          backgroundSize: "100% 100%",
-        }}
-        className="shadow-lg"
-      >
-        {/* Certificate Number */}
-        <div
-          style={{
-            position: "absolute",
-            top: "102px",
-            left: "116px",
-            fontSize: "8px",
-            fontWeight: "600",
-          }}
-        >
-          {form.certNo}
+      {/* CERTIFICATE */}
+      <div className="certificate" ref={certRef}>
+
+
+        {/* RIGHT RIBBON (Yellow) */}
+        <div className="right-ribbon"></div>
+        <div className="watermark">
+  <img src="/logo.png" alt="img" />
+</div>
+
+
+        {/* MAIN CONTENT AREA */}
+        <div className="content">
+
+          {/* ===== MSME HEADER START ===== */}
+          <div className="header">
+            <div className="header-left">
+              <img  src="/logo.png" alt="MSME Logo" />
+              <img src="/logo3.png" alt="Govt Logo" />
+            </div>
+
+            <div className="header-right">
+              <img src="/logo2.png" alt="Digital India Logo" />
+            </div>
+          </div>
+
+         <div className="meta">
+  <div>
+    <strong>Certificate Number :</strong> CWIT-2025-001
+  </div>
+  <div>
+    <strong>Date of Issue :</strong> 07 JAN 2025
+  </div>
+</div>
+
+{/* ===== STEP-3 : INSTITUTE NAME START ===== */}
+<div className="institute">
+  <div className="institute-title">CODE WEB</div>
+  <div className="institute-subtitle">INSTITUTE OF TECHNOLOGY</div>
+  <div className="institute-iso">
+    An ISO 9001:2015 Certified Organization
+  </div>
+</div>
+{/* ===== STEP-3 : INSTITUTE NAME END ===== */}
+{/* ===== STEP-4 : AWARDED TO SECTION START ===== */}
+<div className="awarded-section">
+  
+  {/* LEFT TEXT */}
+  <div className="awarded-left">
+    <p className="awarded-label">This certificate is awarded to :</p>
+    <div className="student-name">VIKASH SHARMA <br /> S/O Mr. RAJU SHARMA</div>
+  </div>
+
+  {/* RIGHT PHOTO BOX */}
+  <div className="photo-box">
+    PHOTO
+  </div>
+
+</div>
+{/* ===== STEP-4 : AWARDED TO SECTION END ===== */}
+{/* ===== STEP-5 : COURSE DETAILS START ===== */}
+<div className="course-section">
+  <div className="course-line">
+    Has Completed the course of
+  </div>
+
+  <div className="course-name">
+    COMPUTER TYPING IN HINDI & ENGLISH
+  </div>
+
+  <div className="course-duration">
+    (COURSE DURATION : 6 MONTHS)
+  </div>
+
+  <div className="course-period">
+    (COURSE PERIOD : 07 JAN 2024 TO 06 JUL 2025)
+  </div>
+</div>
+{/* ===== STEP-5 : COURSE DETAILS END ===== */}
+{/* ===== STEP-6 : TYPING RESULT TABLE START ===== */}
+<div className="result-section">
+  <div className="result-title">
+    Has passed the prescribed examination with
+  </div>
+
+  <table className="result-table">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Speed (WPM)</th>
+        <th>Obtained</th>
+        <th>Accuracy (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Hindi Typing</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>English Typing</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{/* ===== STEP-6 : TYPING RESULT TABLE END ===== */}
+{/* ===== STEP-7 : FOOTER START ===== */}
+<div className="footer-section">
+
+  <div className="authorised">
+    at our authorised study centre
+  </div>
+
+  <div className="footer-logos">
+    <img src="/logo1.png" alt="ISO" />
+    <img src="/logo1.png" alt="IAF" />
+  </div>
+<div className="signatures">
+
+  <div className="sign-box">
+    <div className="sign-text">Deepak Gupta</div>
+    <div className="sign-line"></div>
+    <div className="sign-label">MANAGING DIRECTOR</div>
+  </div>
+
+  <div className="sign-box exam">
+    <div className="sign-text">Hasnain Ansari</div>
+    <div className="sign-line"></div>
+    <div className="sign-label">EXAMINATION CONTROLLER</div>
+  </div>
+
+</div>
+
+
+  <div className="verification">
+    Online certificate Verification Available on:
+    <br />
+    <strong>codewebit.com</strong>
+  </div>
+
+  <div className="address">
+    H.O. : MOTIHARI, EAST CHAMPARAN BIHAR, 845401 <br />
+    ADDRESS : BALUA, RAGHUNATHPUR
+  </div>
+
+</div>
+{/* ===== STEP-7 : FOOTER END ===== */}
+
+
         </div>
 
-        {/* Date of Issue */}
-        <div
-          style={{
-            position: "absolute",
-            top: "99px",
-            right: "6px",
-            fontSize: "7px",
-            fontWeight: "500",
-          }}
-        >
-          {form.date}
-        </div>
-
-        {/* Student Name (UNCHANGED – YOUR ORIGINAL PERFECT POSITION) */}
-        <div
-          style={{
-            position: "absolute",
-            top: "360px",
-            width: "100%",
-            textAlign: "center",
-            fontSize: "32px",
-            fontWeight: "600",
-            color: "#1a237e",
-          }}
-        >
-          {form.student}
-        </div>
-
-        {/* Course Name */}
-        <div
-          style={{
-            position: "absolute",
-            top: "450px",
-            width: "100%",
-            textAlign: "center",
-            fontSize: "20px",
-            fontWeight: "700",
-          }}
-        >
-          {form.course}
-        </div>
-
-        {/* Grade */}
-        <div
-          style={{
-            position: "absolute",
-            top: "495px",
-            width: "100%",
-            textAlign: "center",
-            fontSize: "16px",
-            fontWeight: "600",
-          }}
-        >
-          {form.grade}
-        </div>
-
-        {/* Course Period */}
-        <div
-          style={{
-            position: "absolute",
-            top: "535px",
-            width: "100%",
-            textAlign: "center",
-            fontSize: "16px",
-            fontWeight: "500",
-          }}
-        >
-          {form.period}
-        </div>
       </div>
     </div>
   );
 }
+const btnStyle = {
+  padding: "10px 20px",
+  background: "#1a237e",
+  color: "#fff",
+  borderRadius: "6px",
+  border: "none",
+  cursor: "pointer",
+};
