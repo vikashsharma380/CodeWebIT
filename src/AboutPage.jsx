@@ -2,85 +2,126 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const AboutPage = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6 } },
-  };
-
   return (
-    <div className="flex-grow max-w-5xl p-8 mx-auto">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="space-y-16"
-      >
-        <motion.div variants={itemVariants} className="text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl text-primary">
-            Pioneering Tech Education
-          </h1>
-          <p className="max-w-3xl mx-auto text-lg text-secondary">
-            We are more than an institute; we are a launchpad for the next
-            generation of digital creators and innovators.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={itemVariants}
-          className="grid items-center gap-12 md:grid-cols-2"
-        >
-          <div className="space-y-4">
-            <h2 className="text-3xl font-bold text-primary">Our Story</h2>
-            <p className="leading-relaxed text-secondary">
-              Founded in 2020, CW Institute was born from a passion for
-              technology and a belief that high-quality digital education should
-              be accessible to all. We saw a gap between traditional learning
-              and the fast-paced demands of the tech industry, and we set out to
-              bridge it.
+    <div className="flex-grow bg-background">
+      {/* ================= HERO BLOCK ================= */}
+      <section className="px-6 border-b py-28 border-border">
+        <div className="grid items-center max-w-6xl gap-16 mx-auto md:grid-cols-2">
+          {/* TEXT */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="mb-4 text-sm font-semibold tracking-wide uppercase text-accent">
+              About Us
             </p>
-          </div>
-          <div className="p-8 border rounded-lg bg-card border-border">
-            <svg
-              className="w-full h-full text-accent"
-              fill="none"
-              viewBox="0 0 200 100"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 50 Q 25 10, 50 50 T 100 50 T 150 50 T 200 50"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
-        </motion.div>
 
-        <motion.div
-          variants={itemVariants}
-          className="p-10 text-center border rounded-lg bg-card border-border"
-        >
-          <h2 className="mb-4 text-3xl font-bold text-primary">
-            Our Philosophy
+            <h1 className="mb-6 text-5xl font-extrabold leading-tight text-primary">
+              Practical Tech Education
+              <br />
+              Built for Real Careers
+            </h1>
+
+            <p className="text-lg leading-relaxed text-secondary">
+              Code Web Institute of Technology focuses on real skills, real
+              discipline, and real-world execution — not shortcuts.
+            </p>
+          </motion.div>
+
+          {/* VISUAL ANCHOR */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            className="p-10 border rounded-3xl bg-card border-border"
+          >
+            <div className="grid grid-cols-2 gap-6">
+              {[
+                ["1500+", "Students Trained"],
+                ["120+", "Live Projects"],
+                ["15+", "Programs"],
+                ["5+ Years", "Experience"],
+              ].map((item, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-3xl font-bold text-primary">
+                    {item[0]}
+                  </div>
+                  <div className="mt-1 text-sm text-secondary">{item[1]}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ================= STORY STRIP ================= */}
+      <section className="px-6 py-24 bg-muted">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="p-12 border rounded-3xl bg-card border-border"
+          >
+            <h2 className="mb-4 text-3xl font-bold text-primary">
+              Why We Exist
+            </h2>
+            <p className="text-lg leading-relaxed text-secondary">
+              Traditional education often produces certificate holders without
+              confidence. We built Code Web Institute of Technology to train
+              students through hands-on execution, real projects, and mentor
+              correction — so they are ready for real jobs.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ================= PROCESS ================= */}
+      <section className="px-6 py-24">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="mb-16 text-4xl font-bold text-center text-primary">
+            How We Train
           </h2>
-          <p className="max-w-3xl mx-auto leading-relaxed text-secondary">
-            Our mission is to empower students with practical, in-demand skills.
-            We believe in learning by doing. Our curriculum is project-based,
-            ensuring that students not only learn theory but also gain the
-            hands-on experience necessary to excel and lead in the ever-evolving
-            tech industry.
+
+          <div className="grid gap-10 md:grid-cols-4">
+            {[
+              "Strong Fundamentals",
+              "Hands-on Projects",
+              "Mentor Review",
+              "Industry Execution",
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="p-8 text-center border rounded-2xl bg-card border-border"
+              >
+                <div className="mb-2 text-sm font-semibold text-accent">
+                  Step {i + 1}
+                </div>
+                <h3 className="text-lg font-semibold text-primary">{step}</h3>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= INDUSTRY CREDIT ================= */}
+      <section className="px-6 border-t py-28 border-border">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="mb-4 text-3xl font-bold text-primary">
+            Industry-Backed Training
+          </h3>
+          <p className="text-lg leading-relaxed text-secondary">
+            Code Web Institute of Technology operates as a unit of{" "}
+            <span className="font-semibold text-primary">Code Web Telecom</span>
+            , ensuring students learn under real workflows, professional
+            standards, and industry expectations.
           </p>
-        </motion.div>
-      </motion.div>
+        </div>
+      </section>
     </div>
   );
 };
