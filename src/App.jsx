@@ -25,6 +25,7 @@ import AdminCollectFee from "./Admin/AdminCollectFee";
 import EnrollPage from "./Student/EnrollPage";
 import ManageCourses from "./Admin/ManageCourses";
 import ManageBatches from "./Admin/ManageBatches";
+import Problems from "./Student/Problems";
 
 const AppContent = () => {
   const location = useLocation();
@@ -72,6 +73,7 @@ const AppContent = () => {
               </AdminRoute>
             }
           />
+          <Route path="/problems" element={<Problems />} />
           <Route
             path="/admin/collect-fee"
             element={

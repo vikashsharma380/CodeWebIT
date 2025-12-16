@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
 import logo from "./assets/logo.png"; // ⭐ YOUR LOGO HERE
+import Problems from "./Student/Problems";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -16,7 +17,7 @@ const Header = () => {
     { to: "/courses", label: "Courses" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
-    { to: "/certificate", label: "Problems" }, // ⭐ ADDED
+    { to: "/problems", label: "Problems" }, // ⭐ ADDED
   ];
 
   return (
