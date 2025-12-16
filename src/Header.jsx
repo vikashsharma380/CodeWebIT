@@ -16,7 +16,7 @@ const Header = () => {
     { to: "/courses", label: "Courses" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
-    { to: "/certificate", label: "Certificate" }, // ⭐ ADDED
+    { to: "/certificate", label: "Problems" }, // ⭐ ADDED
   ];
 
   return (
@@ -29,10 +29,9 @@ const Header = () => {
             alt="CWIT Logo"
             className="object-contain w-20 h-20 drop-shadow-md"
           />
-          <span className="text-xl font-extrabold tracking-tight text-blue-700 flex align-text-bottom text-uppercase">
-CODEWEB INSTITUTE OF TECHNOLOGY
+          <span className="flex text-xl font-extrabold tracking-tight text-blue-700 align-text-bottom text-uppercase">
+            CODEWEB INSTITUTE OF TECHNOLOGY
           </span>
-          
         </NavLink>
 
         {/* DESKTOP NAV */}
@@ -59,26 +58,25 @@ CODEWEB INSTITUTE OF TECHNOLOGY
         </nav>
 
         {/* DESKTOP BUTTON */}
-     <div className="hidden md:flex gap-4">
-  <motion.div whileHover={{ scale: 1.06 }}>
-    <NavLink
-      to="/login"
-      className="px-6 py-2 font-semibold text-blue-700 border border-blue-700 rounded-full hover:bg-blue-700 hover:text-white transition"
-    >
-      Login
-    </NavLink>
-  </motion.div>
+        <div className="hidden gap-4 md:flex">
+          <motion.div whileHover={{ scale: 1.06 }}>
+            <NavLink
+              to="/login"
+              className="px-6 py-2 font-semibold text-blue-700 transition border border-blue-700 rounded-full hover:bg-blue-700 hover:text-white"
+            >
+              Login
+            </NavLink>
+          </motion.div>
 
-  <motion.div whileHover={{ scale: 1.06 }}>
-    <NavLink
-      to="/register"
-      className="px-6 py-2 font-semibold text-white bg-blue-700 rounded-full shadow hover:bg-blue-800 transition"
-    >
-      Register
-    </NavLink>
-  </motion.div>
-</div>
-
+          <motion.div whileHover={{ scale: 1.06 }}>
+            <NavLink
+              to="/register"
+              className="px-6 py-2 font-semibold text-white transition bg-blue-700 rounded-full shadow hover:bg-blue-800"
+            >
+              Register
+            </NavLink>
+          </motion.div>
+        </div>
 
         {/* MOBILE MENU ICON */}
         <button
@@ -119,13 +117,12 @@ CODEWEB INSTITUTE OF TECHNOLOGY
             </NavLink>
           </div>
           <NavLink
-  to="/login"
-  onClick={() => setOpen(false)}
-  className="px-5 py-2 font-semibold text-center text-blue-700 border border-blue-700 rounded-full shadow hover:bg-blue-700 hover:text-white"
->
-  Login
-</NavLink>
-
+            to="/login"
+            onClick={() => setOpen(false)}
+            className="px-5 py-2 font-semibold text-center text-blue-700 border border-blue-700 rounded-full shadow hover:bg-blue-700 hover:text-white"
+          >
+            Login
+          </NavLink>
         </motion.div>
       )}
     </header>

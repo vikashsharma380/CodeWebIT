@@ -40,6 +40,9 @@ export default function AdminNavbar() {
         <NavLink to="/admin/batches" className={linkClass}>
           Manage Batches
         </NavLink>
+        <NavLink to="/certificate" className={linkClass}>
+          Certificate
+        </NavLink>
       </div>
 
       {/* RIGHT: LOGOUT */}
