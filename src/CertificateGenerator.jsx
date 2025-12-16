@@ -57,9 +57,14 @@ export default function Certificate() {
 
         {/* RIGHT RIBBON (Yellow) */}
         <div className="right-ribbon"></div>
-        <div className="watermark">
-  <img src="/logo.png" alt="img" />
-</div>
+   
+
+<img
+  src="/waxseal.png"
+  alt="Wax Seal"
+  className="wax-seal-img"
+/>
+
 
 
         {/* MAIN CONTENT AREA */}
@@ -106,7 +111,7 @@ export default function Certificate() {
 
   {/* RIGHT PHOTO BOX */}
   <div className="photo-box">
-    PHOTO
+    <img className="photo-box" src="/photo.jpg" alt="" />
   </div>
 
 </div>
@@ -148,15 +153,15 @@ export default function Certificate() {
     <tbody>
       <tr>
         <td>Hindi Typing</td>
+        <td>30 WPM</td>
         <td></td>
-        <td></td>
-        <td></td>
+        <td>99%</td>
       </tr>
       <tr>
         <td>English Typing</td>
+        <td>45 WPM</td>
         <td></td>
-        <td></td>
-        <td></td>
+        <td>100%</td>
       </tr>
     </tbody>
   </table>

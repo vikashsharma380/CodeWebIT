@@ -2,15 +2,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.015),
-      rgba(0, 0, 0, 0.015) 2px,
-      transparent 2px,
-      transparent 10px
-    );
-  z-index: 1;
+  background-image: url("/logo.png");
+  background-repeat: repeat;
+  background-size: 120px 120px;   /* 🔥 watermark size */
+  opacity: 0.1;                  /* 🔥 light watermark */
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -23,8 +19,21 @@
   align-items: center;
 }
 .certificate {
-  border: 12px double #c7a548;
+  position: relative;
+  background: #fff;
+  border: 6px solid #c7a548;
 }
+
+.certificate::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 2px solid #000;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+
 
 .certificate {
   width: 1080px;
@@ -232,19 +241,28 @@
 .footer-logos img {
   height: 60px;
 }
-
-
 .signatures {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 120px;
-  margin-top: 40px;
-  padding-right: 180px; /* ribbon safe */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 60px;
+  width: 100%;
 }
 
-.exam{
-  margin-left: 100px;
+
+
+.sign-box {
+  width: 220px;          /* 🔥 corner control */
+  text-align: center;
 }
+
+
+.sign-box.exam {
+  margin-left: auto;     /* 🔥 pushes it to extreme right */
+  text-align: center;
+}
+
+
 .verification {
   margin-top: 20px;
 }
@@ -253,17 +271,7 @@
   margin-top: 12px;
   font-size: 12px;
 }
-.signatures {
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 40px;
-  padding-right: 10px; /* ribbon safe */
-}
 
-.sign-box {
-  width: 40%;
-  text-align: center;
-}
 
 .sign-text {
   font-family: "Great Vibes", cursive;
@@ -273,7 +281,7 @@
 }
 
 .sign-line {
-  width: 100%;
+  width: 90%;
   height: 1px;
   background: #000;
   margin: 0 auto 6px;
@@ -310,4 +318,26 @@
 @page {
   size: A4;
   margin: 0;
+}
+
+
+.wax-seal-img {
+  position: absolute;
+  bottom: 100px;     /* 👈 text se thoda upar */
+  right: 50px;      /* 👈 ribbon se safe distance */
+  width: 250px;
+  height: auto;
+  z-index: 6;
+
+filter:
+    brightness(0.8)     /* thoda dark */
+    contrast(2)       /* stamp clarity */
+    saturate(1.)        /* red thoda deep */
+    drop-shadow(0 2px 3px rgba(0,0,0,0.35));
+  
+  
+}
+.wax-seal-img {
+  transform: rotate(18deg);
+
 }
