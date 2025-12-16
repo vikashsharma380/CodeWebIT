@@ -100,23 +100,23 @@ const ContactPage = () => {
                   {
                     icon: <Mail size={28} />,
                     title: "Email",
-                    value: "contact@cwinstitute.com",
-                    link: "mailto:contact@cwinstitute.com",
+                    value: "contact@codeweb.com",
+                    link: "mailto:contact@codeweb.com",
                     time: "Response within 24 hours",
                   },
                   {
                     icon: <Phone size={28} />,
                     title: "Phone",
-                    value: "+91 (123) 456-7890",
-                    link: "tel:+911234567890",
+                    value: "+91 9266982764",
+                    link: "tel:+919266982764",
                     time: "Mon-Sat, 9 AM - 6 PM IST",
                   },
                   {
                     icon: <MapPin size={28} />,
                     title: "Location",
-                    value: "New Delhi, India",
+                    value: "Raghunathpur, Motihari, Bihar 845401",
                     link: null,
-                    time: "Available online worldwide",
+                    time: "Available online & offline",
                   },
                 ].map((contact, i) => (
                   <motion.div
