@@ -108,7 +108,7 @@
 }
 
 .content {
-  padding: 70px 120px 70px 80px; /* right side extra space */
+  padding: 70px 80px 70px 100px; /* right side extra space */
 }
 
 .content p {
@@ -118,6 +118,7 @@
 .institute {
   margin-top: 40px;
   text-align: center;
+  position: relative;
 }
 
 .institute-title {
@@ -340,4 +341,24 @@ filter:
 .wax-seal-img {
   transform: rotate(18deg);
 
+}
+
+
+.qr-box {
+  position: absolute;
+  top: -10px;        /* institute se thoda upar */
+  left: 0;           /* 👈 LEFT SIDE */
+  text-align: center;
+  z-index: 6;        /* watermark se upar */
+}
+
+.qr-box img {
+  width: 90px;
+  height: 90px;
+}
+
+.qr-text {
+  font-size: 11px;
+  margin-top: 4px;
+  color: #444;
 }
