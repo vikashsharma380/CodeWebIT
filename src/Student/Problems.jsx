@@ -6,7 +6,7 @@ const problemsData = [
     title: "Two Sum",
     difficulty: "Easy",
     category: "Array",
-    status: "Unsolved",
+    status: "Solved",
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const problemsData = [
     title: "Valid Parentheses",
     difficulty: "Medium",
     category: "Stack",
-    status: "Unsolved",
+    status: "Solved",
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const problemsData = [
     title: "Merge Intervals",
     difficulty: "Hard",
     category: "Array",
-    status: "Unsolved",
+    status: "Solved",
   },
 ];
 
