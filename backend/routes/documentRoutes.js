@@ -3,6 +3,7 @@ import Document from "../models/Document.js";
 import Counter from "../models/Counter.js";
 import { DOCUMENT_TYPES } from "../utils/documentTypes.js";
 
+
 const router = express.Router();
 
 async function getNextDocumentNo(typeKey) {
