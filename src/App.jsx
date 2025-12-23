@@ -116,6 +116,15 @@ const AppContent = () => {
             }
           />
           <Route
+  path="/admin/verification/:certificateNo"
+  element={
+    <AdminRoute>
+      <Verification />
+    </AdminRoute>
+  }
+/>
+
+          <Route
             path="/admin/marksheet-verification"
             element={
               <AdminRoute>
