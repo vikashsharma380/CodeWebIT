@@ -30,6 +30,11 @@ import Problems from "./Student/Problems";
 const AppContent = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const hideWebsiteLayoutRoutes = ["/certificate"];
+
+  const hideWebsiteLayout = hideWebsiteLayoutRoutes.includes(
+    location.pathname
+  );
 
   return (
     <div className="flex flex-col min-h-screen antialiased text-secondary bg-background">

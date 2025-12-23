@@ -1,61 +1,314 @@
-import "./certificate.css";
+import "./ADCAMarksheet.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef } from "react";
 
-export default function ADCAMarksheet({ goBack }) {
-  const ref = useRef();
+export default function Certificate() {
+  const certRef = useRef();
 
+  // PNG DOWNLOAD
+  const downloadPNG = async () => {
+    const canvas = await html2canvas(certRef.current, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const link = document.createElement("a");
+    link.download = "marksheet.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  };
+
+  // PDF DOWNLOAD
   const downloadPDF = async () => {
-    const canvas = await html2canvas(ref.current, { scale: 3 });
+    const canvas = await html2canvas(certRef.current, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("portrait", "mm", "a4");
-    const w = 210;
-    const h = (canvas.height * w) / canvas.width;
-    pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, w, h);
-    pdf.save("adca-marksheet.pdf");
+    const pdfWidth = 210;
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("marksheet.pdf");
   };
 
   return (
     <>
-      <button onClick={goBack} style={btnStyle}>⬅ Back</button>
-      <button onClick={downloadPDF} style={{ ...btnStyle, marginLeft: 10 }}>
-        Download PDF
-      </button>
+      {/* DOWNLOAD BUTTONS */}
+      <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
+        <button onClick={downloadPDF} style={btnStyle}>
+          Download PDF
+        </button>
+        <button onClick={downloadPNG} style={{ ...btnStyle, marginLeft: 10 }}>
+          Download PNG
+        </button>
+      </div>
 
-      <div className="certificate" ref={ref}>
-        <h1 style={{ textAlign: "center" }}>ADCA MARKSHEET</h1>
+      {/* CERTIFICATE */}
+      <div className="certificate-wrapper">
+        <div className="certificate" ref={certRef}>
+          <div className="right-ribbon"></div>
 
-        <p><b>Name:</b> Vikash Sharma</p>
-        <p><b>Father Name:</b> Raju Sharma</p>
-        <p><b>Session:</b> 2024 - 2025</p>
+          <img src="/waxseal.png" alt="Wax Seal" className="wax-seal-img" />
 
-        <table border="1" width="100%" style={{ marginTop: 20 }}>
-          <thead>
-            <tr>
-              <th>Subject</th>
-              <th>Max Marks</th>
-              <th>Obtained</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Fundamental</td><td>100</td><td>85</td></tr>
-            <tr><td>MS Office</td><td>100</td><td>88</td></tr>
-            <tr><td>Internet</td><td>100</td><td>90</td></tr>
-            <tr><td>Tally</td><td>100</td><td>82</td></tr>
-          </tbody>
-        </table>
+          <div className="content">
+            {/* HEADER */}
+            <div className="header">
+              <div className="header-left">
+                <img src="/logo.png" alt="" />
+                <img src="/logo3.png" alt="" />
+              </div>
+              <div className="header-right">
+                <img src="/logo2.png" alt="" />
+              </div>
+            </div>
 
-        <h3 style={{ marginTop: 20 }}>Result: PASS</h3>
-        <h3>Grade: A</h3>
+            {/* META */}
+            <div className="meta">
+              <div>
+                <strong>Marksheet No :</strong> CWIT-2025-001
+              </div>
+              <div>
+                <strong>Date :</strong> 07 JAN 2025
+              </div>
+            </div>
+
+            {/* INSTITUTE */}
+            <div className="institute">
+              <div className="qr-box">
+                <img src="/qr.png" alt="QR" />
+                <div className="qr-text">Scan to Verify</div>
+              </div>
+
+              <div className="institute-title">CODE WEB</div>
+              <div className="institute-subtitle">INSTITUTE OF TECHNOLOGY</div>
+              <div className="institute-iso">
+                An ISO 9001:2015 Certified Organization
+              </div>
+            </div>
+
+            {/* STUDENT FORM (DESIGN SAME) */}
+            <div className="awarded-section">
+              <div className="awarded-left">
+                <p className="awarded-label">Student Details :</p>
+
+                <div className="student-form">
+                  <div>
+                    <span>Name :</span> <strong>VIKASH SHARMA</strong>
+                  </div>
+                  <div>
+                    <span>Father Name :</span> <strong>RAJU SHARMA</strong>
+                  </div>
+                  <div>
+                    <span>Roll No :</span> <strong>CWIT2025</strong>
+                  </div>
+                  <div>
+                    <span>Course :</span> <strong>ADCA</strong>
+                  </div>
+                  <div>
+                    <span>Branch :</span> <strong>COMPUTER SCIENCE</strong>
+                  </div>
+                  <div>
+                    <span>Year :</span> <strong>2025</strong>
+                  </div>
+                  <div>
+                    <span>Session :</span> <strong>2024-2025</strong>
+                  </div>
+                  <div>
+                    <span>College :</span> <strong>CODE WEB</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div className="photo-box">
+                <img
+                  style={{ width: "180px", height: "230px" }}
+                  src="/photo.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            {/* MARKS TABLE */}
+            <div className="result-section">
+              <table className="premium-marks-table">
+                <thead>
+                  <tr>
+                    <th rowSpan="2" className="subject-col">
+                      Subject
+                    </th>
+                    <th colSpan="2">Objective Marks</th>
+                    <th colSpan="2">Practical Marks</th>
+                    <th colSpan="2">Total Marks</th>
+                  </tr>
+                  <tr>
+                    <th>Out of</th>
+                    <th>Scored</th>
+
+                    <th>Out of</th>
+                    <th>Scored</th>
+
+                    <th>Out of</th>
+                    <th>Scored</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td className="subject-col">Computer Fundamentals</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+
+                  <tr>
+                    <td className="subject-col">Computer Fundamentals</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+
+                  <tr>
+                    <td className="subject-col">Computer Fundamentals</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+                  <tr>
+                    <td className="subject-col">Computer Fundamentals</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+                  <tr>
+                    <td className="subject-col">Computer Fundamentals</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+                  <tr>
+                    <td className="subject-col">Computer Fundamentals</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+                  <tr>
+                    <td className="subject-col">Computer Fundamentals</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+                  <tr>
+                    <td className="subject-col">Total</td>
+                    <td>100</td>
+                    <td>33</td>
+                    <td>60</td>
+                    <td>25</td>
+                    <td>85</td>
+                    <td>90</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table className="premium-marks-table">
+                <thead>
+                  <tr>
+                    <th rowSpan="2" className="subject-col">
+                      Subject
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Out of</th>
+                    <th>Scored</th>
+                  </tr>
+                </thead>
+              </table>
+              <table className="premium-marks-table">
+                <thead>
+                  <tr>
+                    <th rowSpan="2" className="subject-col">
+                      {" "}
+                      <b>Subject</b>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Out of</th>
+                    <th>Scored</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+
+            {/* FOOTER */}
+            <div className="footer-section">
+              <div className="authorised">at our authorised study centre</div>
+
+              <div className="footer-logos">
+                <img src="/logo1.png" alt="ISO" />
+                <img src="/logo1.png" alt="IAF" />
+              </div>
+              <div className="signatures">
+                <div className="sign-box">
+                  <div className="sign-text">Deepak Gupta</div>
+                  <div className="sign-line"></div>
+                  <div className="sign-label">MANAGING DIRECTOR</div>
+                </div>
+
+                <div className="sign-box exam">
+                  <div className="sign-text">Hasnain Ansari</div>
+                  <div className="sign-line"></div>
+                  <div className="sign-label">EXAMINATION CONTROLLER</div>
+                </div>
+              </div>
+
+              <div className="verification">
+                Online certificate Verification Available on:
+                <br />
+                <strong>codewebit.com</strong>
+              </div>
+
+              <div className="address">
+                H.O. : MOTIHARI, EAST CHAMPARAN BIHAR, 845401 <br />
+                ADDRESS : BALUA, RAGHUNATHPUR
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
 }
 
 const btnStyle = {
-  padding: "10px 16px",
+  padding: "10px 20px",
   background: "#1a237e",
   color: "#fff",
-  border: "none",
   borderRadius: "6px",
+  border: "none",
+  cursor: "pointer",
 };
