@@ -12,7 +12,7 @@ export default function ManageCourses() {
   const [editingId, setEditingId] = useState(null);
 
   const fetchCourses = async () => {
-    const res = await fetch("http://localhost:5000/api/fees/courses");
+    const res = await fetch("http://api.codewebit.com/api/fees/courses");
     const data = await res.json();
     setCourses(data);
   };
@@ -24,8 +24,8 @@ export default function ManageCourses() {
   const saveCourse = async () => {
     const method = editingId ? "PUT" : "POST";
     const url = editingId
-      ? `http://localhost:5000/api/fees/courses/${editingId}`
-      : "http://localhost:5000/api/fees/courses";
+      ? `http://api.codewebit.com/api/fees/courses/${editingId}`
+      : "http://api.codewebit.com/api/fees/courses";
 
     const res = await fetch(url, {
       method,
@@ -55,7 +55,7 @@ export default function ManageCourses() {
 
   const deleteCourse = async (id) => {
     if (!window.confirm("Delete course?")) return;
-    const res = await fetch(`http://localhost:5000/api/fees/courses/${id}`, {
+    const res = await fetch(`http://api.codewebit.com/api/fees/courses/${id}`, {
       method: "DELETE",
     });
     const data = await res.json();

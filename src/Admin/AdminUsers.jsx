@@ -23,7 +23,7 @@ export default function AdminUsers() {
       if (q) params.set("q", q);
       if (role) params.set("role", role);
 
-      const res = await fetch(`http://localhost:5000/api/users?${params.toString()}`, {
+      const res = await fetch(`http://api.codewebit.com/api/users?${params.toString()}`, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });
       const data = await res.json();
@@ -46,7 +46,7 @@ export default function AdminUsers() {
   const handleDelete = async (id) => {
     if (!confirm("Delete this user?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${id}`, {
+      const res = await fetch(`http://api.codewebit.com/api/users/${id}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer " + localStorage.getItem("token") }
       });

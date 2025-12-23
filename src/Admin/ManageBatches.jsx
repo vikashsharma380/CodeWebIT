@@ -12,14 +12,14 @@ export default function ManageBatches() {
   const [editingId, setEditingId] = useState(null);
 
   const fetchCourses = async () => {
-    const res = await fetch("http://localhost:5000/api/fees/courses");
+    const res = await fetch("http://api.codewebit.com/api/fees/courses");
     const data = await res.json();
     setCourses(data);
   };
 
   const fetchBatches = async () => {
     if (!selectedCourse) return setBatches([]);
-    const res = await fetch(`http://localhost:5000/api/fees/batches?courseId=${selectedCourse}`);
+    const res = await fetch(`http://api.codewebit.com/api/fees/batches?courseId=${selectedCourse}`);
     const data = await res.json();
     setBatches(data);
   };
@@ -35,8 +35,8 @@ export default function ManageBatches() {
   const saveBatch = async () => {
     const method = editingId ? "PUT" : "POST";
     const url = editingId
-      ? `http://localhost:5000/api/fees/batches/${editingId}`
-      : "http://localhost:5000/api/fees/batches";
+      ? `http://api.codewebit.com/api/fees/batches/${editingId}`
+      : "http://api.codewebit.com/api/fees/batches";
 
     const res = await fetch(url, {
       method,
@@ -60,7 +60,7 @@ export default function ManageBatches() {
 
   const deleteBatch = async (id) => {
     if (!window.confirm("Delete batch?")) return;
-    const res = await fetch(`http://localhost:5000/api/fees/batches/${id}`, { method: "DELETE" });
+    const res = await fetch(`http://api.codewebit.com/api/fees/batches/${id}`, { method: "DELETE" });
     const data = await res.json();
     if (!res.ok) return alert(data.message);
     alert("Batch deleted");

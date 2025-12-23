@@ -5,7 +5,7 @@ export default function AdminCollectFee() {
   const [enroll, setEnroll] = useState(null);
 
   const search = async () => {
-    const res = await fetch(`http://localhost:5000/api/fees/enrollments/${searchId}`);
+    const res = await fetch(`http://api.codewebit.com/api/fees/enrollments/${searchId}`);
     const data = await res.json();
     if (!res.ok) return alert(data.message);
     setEnroll(data);
@@ -15,7 +15,7 @@ export default function AdminCollectFee() {
     const mode = prompt("Payment Mode (cash/up i)?", "cash");
     if (!mode) return;
 
-    const res = await fetch("http://localhost:5000/api/fees/pay-offline/pay", {
+    const res = await fetch("http://api.codewebit.com/api/fees/pay-offline/pay", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

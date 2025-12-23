@@ -19,7 +19,7 @@ const [form, setForm] = useState({
   photo: "",
 });
 
-const qrValue = `https://codewebit.com/verify/${form.certificateNo}`;
+const qrValue = `https://api.codewebit.com/verify/${form.certificateNo}`;
 const DOCUMENT_TYPE = "adca_certificate";
 
   const handleChange = (e) => {
@@ -44,7 +44,7 @@ const toBase64 = (file, cb) => {
 };
 
 const saveCertificate = async () => {
-  const res = await fetch("http://localhost:5000/api/documents", {
+  const res = await fetch("http://api.codewebit.com/api/documents", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
