@@ -5,6 +5,7 @@ import ADCACertificate from "../src/ADCACertificate";
 import ADCAMarksheet from "../src/ADCAMarksheet";
 import InternshipCertificate from "../src/InternshipCertificate";
 import FullStackCertificate from "../src/FullStackCertificate";
+import CertificatesList from "./Admin/CertificatesList";
 
 export default function Certificates() {
   const [selected, setSelected] = useState(null);
@@ -24,6 +25,11 @@ export default function Certificates() {
   if (selected === "fullstack")
     return <FullStackCertificate goBack={() => setSelected(null)} />;
 
+  if (selected === "list")
+    return <CertificatesList goBack={() => setSelected(null)} />;
+
+  
+
   return (
     <div className="min-h-screen bg-slate-50 p-10">
       <h1 className="text-3xl font-bold mb-8 text-center">
@@ -35,6 +41,7 @@ export default function Certificates() {
         <Card title="ADCA MARKSHEET" onClick={() => setSelected("marksheet")} />
         <Card title="TYPING CERTIFICATE" onClick={() => setSelected("typing")} />
         <Card title="INTERNSHIP CERTIFICATE" onClick={() => setSelected("internship")} />
+     <Card title={"LIST OF CERTIFICATES"} onClick={() => setSelected("list")} />
         <Card title="FULL STACK CERTIFICATE" onClick={() => setSelected("fullstack")} />
       </div>
     </div>

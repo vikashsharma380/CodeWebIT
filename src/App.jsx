@@ -29,6 +29,7 @@ import Problems from "./Student/Problems";
 import Verification from "./Admin/CertificateVerification";
 import MarksheetVerification from "./Admin/MarksheetVerification";
 import TypingCertificateVerification from "./Admin/TypingCertificateVerification";
+import CertificatesList from "./Admin/CertificatesList";
 
 const AppContent = () => {
   const location = useLocation();
@@ -139,6 +140,17 @@ const AppContent = () => {
               </AdminRoute>
             }
           />
+
+
+          <Route
+  path="/admin/certificates"
+  element={
+    <AdminRoute>
+      <CertificatesList />
+    </AdminRoute>
+  }
+/>
+
         </Routes>
       </main>
 

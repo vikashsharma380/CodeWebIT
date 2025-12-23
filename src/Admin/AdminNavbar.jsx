@@ -47,6 +47,7 @@ export default function AdminNavbar() {
         <NavLink to="/certificate" className={linkClass}>
           Certificate
         </NavLink>
+        
 
         {/* ✅ VERIFICATION DROPDOWN */}
         <div className="relative">

@@ -65,4 +65,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+// ✅ GET ALL DOCUMENTS (Admin List)
+router.get("/", async (req, res) => {
+  try {
+    const documents = await Document.find()
+      .sort({ createdAt: -1 }); // latest first
+
+    res.json({
+      success: true,
+      list: documents,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+
+
+
 export default router;
