@@ -26,6 +26,9 @@ import EnrollPage from "./Student/EnrollPage";
 import ManageCourses from "./Admin/ManageCourses";
 import ManageBatches from "./Admin/ManageBatches";
 import Problems from "./Student/Problems";
+import Verification from "./Admin/CertificateVerification";
+import MarksheetVerification from "./Admin/MarksheetVerification";
+import TypingCertificateVerification from "./Admin/TypingCertificateVerification";
 
 const AppContent = () => {
   const location = useLocation();
@@ -103,6 +106,31 @@ const AppContent = () => {
               </AdminRoute>
             }
           />
+          <Route
+            path="/admin/verification"
+            element={
+              <AdminRoute>
+                <Verification />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/marksheet-verification"
+            element={
+              <AdminRoute>
+                <MarksheetVerification />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/typing-verification"
+            element={
+              <AdminRoute>
+                <TypingCertificateVerification />
+              </AdminRoute>
+            }
+          />
+
           <Route
             path="/admin/batches"
             element={
