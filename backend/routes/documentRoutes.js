@@ -84,6 +84,33 @@ router.get("/", async (req, res) => {
   }
 });
 
+// ✅ VERIFY CERTIFICATE BY NUMBER
+router.get("/verify/:certificateNo", async (req, res) => {
+  try {
+    const { certificateNo } = req.params;
+
+    const doc = await Document.findOne({
+      documentNo: certificateNo,
+    });
+
+    if (!doc) {
+      return res.status(404).json({
+        success: false,
+        message: "Certificate not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      document: doc,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
 
 
 
