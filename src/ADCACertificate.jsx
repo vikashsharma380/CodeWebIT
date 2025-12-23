@@ -1,12 +1,30 @@
 import "./certificate.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { QRCodeCanvas } from "qrcode.react";
 
 export default function Certificate() {
   const certRef = useRef();
+const [form, setForm] = useState({
+  certificateNo: "",        // backend se aayega
+  issueDate: "07 JAN 2025",
+  studentName: "",
+  fatherName: "",
+  courseName: "",
+  courseDuration: "",
+  coursePeriod: "",
+  grade: "",
+  percentage: "",
+  photo: "",
+});
 
-  // ✅ PNG DOWNLOAD
+const qrValue = `https://codewebit.com/verify/${form.certificateNo}`;
+const DOCUMENT_TYPE = "adca_certificate";
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
   const downloadPNG = async () => {
     const canvas = await html2canvas(certRef.current, {
       scale: 3,
@@ -19,28 +37,97 @@ export default function Certificate() {
     link.href = canvas.toDataURL("image/png");
     link.click();
   };
+const toBase64 = (file, cb) => {
+  const reader = new FileReader();
+  reader.onloadend = () => cb(reader.result);
+  reader.readAsDataURL(file);
+};
+
+const saveCertificate = async () => {
+  const res = await fetch("http://localhost:5000/api/documents", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      ...form,
+      documentType: DOCUMENT_TYPE, // 👈 yahin se backend type samjhega
+    }),
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    alert(`Certificate No: ${data.documentNo}`);
+
+    // 🔥 backend se aaya hua auto number UI me set karo
+    setForm(prev => ({
+      ...prev,
+      certificateNo: data.documentNo,
+    }));
+  }
+};
+
+
 
   // ✅ PDF DOWNLOAD (PORTRAIT)
   const downloadPDF = async () => {
-    const canvas = await html2canvas(certRef.current, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: "#ffffff",
-    });
+  const canvas = await html2canvas(certRef.current, {
+    scale: 2,                 // stable
+    useCORS: true,
+    backgroundColor: "#ffffff",
 
-    const imgData = canvas.toDataURL("image/png");
+    // 👇 certificate ka EXACT pixel size
+    width: 1080,
+    height: 1527,
+    windowWidth: 1080,
+    windowHeight: 1527,
+  });
 
-    const pdf = new jsPDF("portrait", "mm", "a4");
-    const pdfWidth = 210;
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  const imgData = canvas.toDataURL("image/png");
 
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("certificate.pdf");
-  };
+  const pdf = new jsPDF("portrait", "mm", "a4");
+
+  // 👇 FIXED A4 SIZE (MOST IMPORTANT)
+  pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+
+  pdf.save("certificate.pdf");
+};
+
 
   return (
     <>
+    {/* ===== DATA INPUT PANEL (NO DESIGN CHANGE) ===== */}
+<div style={{ padding: 20, background: "#f5f5f5" }}>
+<input
+  name="certificateNo"
+  value={form.certificateNo}
+  readOnly
+  placeholder="Auto Generated Certificate No"
+/>
+
+  <input name="issueDate" placeholder="Issue Date" onChange={handleChange} />
+  <input name="studentName" placeholder="Student Name" onChange={handleChange} />
+  <input name="fatherName" placeholder="Father Name" onChange={handleChange} />
+  <input name="courseName" placeholder="Course Name" onChange={handleChange} />
+  <input name="courseDuration" placeholder="Course Duration" onChange={handleChange} />
+  <input name="coursePeriod" placeholder="Course Period" onChange={handleChange} />
+  <input name="grade" placeholder="Grade" onChange={handleChange} />
+  <input name="percentage" placeholder="Percentage" onChange={handleChange} />
+<input
+  type="file"
+  accept="image/*"
+  onChange={(e) =>
+    toBase64(e.target.files[0], (base64) =>
+      setForm({ ...form, photo: base64 })
+    )
+  }
+/>
+
+
+  <button onClick={saveCertificate}>Save Certificate</button>
+</div>
+
       <div className="certificate-wrapper">
+        
         {/* BUTTONS */}
         <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
           <button onClick={downloadPDF} style={btnStyle}>
@@ -53,6 +140,8 @@ export default function Certificate() {
 
         {/* CERTIFICATE */}
         <div className="certificate" ref={certRef}>
+
+          
           {/* RIGHT RIBBON (Yellow) */}
           <div className="right-ribbon"></div>
 
@@ -74,19 +163,29 @@ export default function Certificate() {
 
             <div className="meta">
               <div>
-                <strong>Certificate Number :</strong> CWIT-2025-001
+               <strong>Certificate Number :</strong> {form.certificateNo}
+
               </div>
               <div>
-                <strong>Date of Issue :</strong> 07 JAN 2025
+               <strong>Date of Issue :</strong> {form.issueDate}
+
               </div>
             </div>
 
             {/* ===== STEP-3 : INSTITUTE NAME START ===== */}
             <div className="institute">
-                 <div className="qr-box">
-      <img src="/qr.png" alt="QR Code" />
-      <div className="qr-text">Scan to Verify</div>
-    </div>
+        <div className="qr-box">
+  <QRCodeCanvas
+    value={qrValue}
+    size={90}
+    bgColor="#ffffff"
+    fgColor="#000000"
+    level="H"
+    includeMargin={false}
+  />
+  <div className="qr-text">Scan to Verify</div>
+</div>
+
               <div className="institute-title">CODE WEB</div>
               <div className="institute-subtitle">INSTITUTE OF TECHNOLOGY</div>
               <div className="institute-iso">
@@ -102,13 +201,20 @@ export default function Certificate() {
                   This certificate is awarded to :
                 </p>
                 <div className="student-name">
-                  VIKASH SHARMA <br /> S/O Mr. RAJU SHARMA
+                 {form.studentName || "STUDENT NAME"} <br />
+S/O Mr. {form.fatherName || "FATHER NAME"}
+
                 </div>
               </div>
 
               {/* RIGHT PHOTO BOX */}
               <div className="photo-box">
-                <img className="photo-box" src="/photo.jpg" alt="" />
+               <img
+  className="photo-box"
+  src={form.photo || "/photo.jpg"}
+  alt=""
+/>
+
               </div>
             </div>
             {/* ===== STEP-4 : AWARDED TO SECTION END ===== */}
@@ -117,15 +223,18 @@ export default function Certificate() {
               <div className="course-line">Has Completed the course of</div>
 
               <div className="course-name">
-                ADVANCE DIPLOMA IN COMPUTER APPLICATIONS
+               {form.courseName || "COURSE NAME"}
+
               </div>
 
               <div className="course-duration">
-                (COURSE DURATION : 12 MONTHS)
+              (COURSE DURATION : {form.courseDuration || "DURATION"})
+
               </div>
 
               <div className="course-period">
-                (COURSE PERIOD : 07 JAN 2024 TO 06 DEC 2025)
+               (COURSE PERIOD : {form.coursePeriod || "PERIOD"})
+
               </div>
             </div>
             {/* ===== STEP-5 : COURSE DETAILS END ===== */}
@@ -135,7 +244,8 @@ export default function Certificate() {
                 Has passed the prescribed examination with
               </div>
                 <div className="result-title">
-               A Grade (with 88.00 % marks)
+              {form.grade || "GRADE"} (with {form.percentage || "0"} % marks)
+
               </div>
 
               {/* <table className="result-table">
