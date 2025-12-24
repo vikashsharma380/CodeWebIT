@@ -5,7 +5,7 @@ export default function AdminDashboard() {
   const [summary, setSummary] = useState({});
 
   useEffect(() => {
-    fetch("http://api.codewebit.com/api/users/summary", {
+    fetch("http://api.codewebit.com/api/auth/users/summary", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
