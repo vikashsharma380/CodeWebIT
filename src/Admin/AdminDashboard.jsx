@@ -5,11 +5,11 @@ export default function AdminDashboard() {
   const [summary, setSummary] = useState({});
 
   useEffect(() => {
-    fetch("https://api.codewebit.com/api/auth/users/summary", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
+    fetch("https://api.codewebit.com/api/users/summary", {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+})
       .then((res) => res.json())
       .then((data) => setSummary(data));
   }, []);
