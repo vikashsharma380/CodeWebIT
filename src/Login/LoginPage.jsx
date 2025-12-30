@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function LoginPage() {
+  
+const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +23,9 @@ export default function LoginPage() {
       localStorage.setItem("token", res.token);
       localStorage.setItem("role", res.user.role);
       alert("Login successful!");
-      window.location.href = "/admin";
+     
+// login success ke baad
+navigate("/admin");
     } catch (err) {
       alert("Something went wrong");
     }
