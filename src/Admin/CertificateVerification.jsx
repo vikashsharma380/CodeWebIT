@@ -10,7 +10,7 @@ export default function CertificateVerification() {
   useEffect(() => {
     if (!certificateNo) return;
 
-    fetch(`http://api.codewebit.com/api/documents/verify/${certificateNo}`)
+    fetch(`https://api.codewebit.com/api/documents/verify/${certificateNo}`)
       .then(res => res.json())
       .then(out => {
         if (out.success) setData(out.document);

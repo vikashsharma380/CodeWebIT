@@ -44,7 +44,7 @@ const toBase64 = (file, cb) => {
 };
 
 const saveCertificate = async () => {
-  const res = await fetch("http://api.codewebit.com/api/documents", {
+  const res = await fetch("https://api.codewebit.com/api/documents", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

@@ -5,7 +5,7 @@ export default function CertificatesList() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://api.codewebit.com/api/documents")
+    fetch("https://api.codewebit.com/api/documents")
       .then(res => res.json())
       .then(data => {
         if (data.success) setList(data.list);

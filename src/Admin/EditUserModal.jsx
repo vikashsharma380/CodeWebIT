@@ -29,7 +29,7 @@ export default function EditUserModal({ user, onClose, onSaved }) {
       // if password empty, remove it
       if (!body.password) delete body.password;
 
-      const res = await fetch(`http://api.codewebit.com/api/users/${user._id}`, {
+      const res = await fetch(`https://api.codewebit.com/api/users/${user._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

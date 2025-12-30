@@ -20,7 +20,7 @@ export default function AdminCreateUser() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://api.codewebit.com/api/users/create", {
+      const response = await fetch("https://api.codewebit.com/api/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

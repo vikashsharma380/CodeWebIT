@@ -10,17 +10,17 @@ export default function EnrollPage() {
   const [enrollment, setEnrollment] = useState(null);
 
   useEffect(()=> {
-    fetch("http://api.codewebit.com/api/fees/courses").then(r=>r.json()).then(setCourses);
+    fetch("https://api.codewebit.com/api/fees/courses").then(r=>r.json()).then(setCourses);
   },[]);
 
   useEffect(()=>{
     if (!selectedCourse) return setBatches([]);
-    fetch(`http://api.codewebit.com/api/fees/batches?courseId=${selectedCourse}`).then(r=>r.json()).then(setBatches);
+    fetch(`https://api.codewebit.com/api/fees/batches?courseId=${selectedCourse}`).then(r=>r.json()).then(setBatches);
   },[selectedCourse]);
 
   const createEnrollment = async () => {
     try {
-      const res = await fetch("http://api.codewebit.com/api/fees/enrollments", {
+      const res = await fetch("https://api.codewebit.com/api/fees/enrollments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -43,7 +43,7 @@ export default function EnrollPage() {
 
   const payNow = async (amount) => {
     // step 1: create order on server
-    const res = await fetch("http://api.codewebit.com/api/fees/payments/create-order", {
+    const res = await fetch("https://api.codewebit.com/api/fees/payments/create-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ enrollmentId: enrollment._id, amount })
@@ -61,7 +61,7 @@ export default function EnrollPage() {
       order_id: order.id,
       handler: async function (response) {
         // verify on server
-        const verify = await fetch("http://api.codewebit.com/api/fees/payments/verify", {
+        const verify = await fetch("https://api.codewebit.com/api/fees/payments/verify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
