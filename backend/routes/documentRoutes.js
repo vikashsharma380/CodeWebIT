@@ -24,7 +24,7 @@ async function getNextDocumentNo(typeKey) {
   const padded = String(counter.seq).padStart(4, "0");
   const year = new Date().getFullYear();
 
-  return `${type.prefix}-${year}-${padded}`;
+  return `${type.prefix}${year}${padded}`;
 }
 
 // ✅ CREATE DOCUMENT (Certificate / Marksheet)
