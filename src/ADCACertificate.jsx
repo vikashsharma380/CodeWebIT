@@ -19,7 +19,7 @@ const [form, setForm] = useState({
   photo: "",
 });
 
-const qrValue = `https://api.codewebit.com/verification/${form.certificateNo}`;
+const qrValue = `https://api.codewebit.com/admin/verification/${form.certificateNo}`;
 const DOCUMENT_TYPE = "adca_certificate";
 
   const handleChange = (e) => {
