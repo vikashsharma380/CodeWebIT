@@ -26,7 +26,7 @@ import EnrollPage from "./Student/EnrollPage";
 import ManageCourses from "./Admin/ManageCourses";
 import ManageBatches from "./Admin/ManageBatches";
 import Problems from "./Student/Problems";
-import Verification from "./Admin/CertificateVerification";
+import Verification from "./CertificateVerification";
 import MarksheetVerification from "./Admin/MarksheetVerification";
 import TypingCertificateVerification from "./Admin/TypingCertificateVerification";
 import CertificatesList from "./Admin/CertificatesList";
@@ -107,22 +107,12 @@ const AppContent = () => {
               </AdminRoute>
             }
           />
-          <Route
-            path="/admin/verification"
-            element={
-              <AdminRoute>
-                <Verification />
-              </AdminRoute>
-            }
-          />
-          <Route
-  path="/admin/verification/:certificateNo"
-  element={
-    <AdminRoute>
-      <Verification />
-    </AdminRoute>
-  }
+         <Route
+  path="/verify"
+  element={<Verification />}
 />
+
+     
 
           <Route
             path="/admin/marksheet-verification"

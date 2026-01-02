@@ -1,24 +1,28 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CheckCircle, XCircle } from "lucide-react";
 
 export default function CertificateVerification() {
-  const { certificateNo } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!certificateNo) return;
+  const params = new URLSearchParams(window.location.search);
+  const cert = params.get("cert");
 
-    fetch(`https://api.codewebit.com/api/documents/verify/${certificateNo}`)
-      .then(res => res.json())
-      .then(out => {
-        if (out.success) setData(out.document);
-        else setData(null);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [certificateNo]);
+  if (!cert) {
+    setLoading(false);
+    return;
+  }
+
+  fetch(`https://api.codewebit.com/api/documents/verify/${cert}`)
+    .then(res => res.json())
+    .then(out => {
+      if (out.success) setData(out.document);
+      else setData(null);
+      setLoading(false);
+    })
+    .catch(() => setLoading(false));
+}, []);
 
   /* ---------- STATES ---------- */
 

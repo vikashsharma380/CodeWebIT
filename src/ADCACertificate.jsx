@@ -19,7 +19,7 @@ const [form, setForm] = useState({
   photo: "",
 });
 
-const qrValue = `https://api.codewebit.com/admin/verification/${form.certificateNo}`;
+const qrValue = `https://codewebit.com/verify?cert=${form.certificateNo}`;
 const DOCUMENT_TYPE = "adca_certificate";
 
   const handleChange = (e) => {
@@ -175,14 +175,16 @@ const saveCertificate = async () => {
             {/* ===== STEP-3 : INSTITUTE NAME START ===== */}
             <div className="institute">
         <div className="qr-box">
+ {form.certificateNo && (
   <QRCodeCanvas
     value={qrValue}
     size={90}
     bgColor="#ffffff"
     fgColor="#000000"
     level="H"
-    includeMargin={false}
   />
+)}
+
   <div className="qr-text">Scan to Verify</div>
 </div>
 
