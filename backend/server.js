@@ -9,6 +9,7 @@ import batchRoutes from "./routes/fees/batches.js";
 import enrollmentRoutes from "./routes/fees/enrollments.js";
 import paymentRoutes from "./routes/fees/payments.js";
 import documentRoutes from "./routes/documentRoutes.js";
+import marksheetRoutes from "./routes/marksheetRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/fees/batches", batchRoutes);
 app.use("/api/fees/enrollments", enrollmentRoutes);
 app.use("/api/fees/payments", paymentRoutes);
 app.use("/api/documents", documentRoutes);
+app.use("/api/marksheets", marksheetRoutes);
 
 
 // Test Route
