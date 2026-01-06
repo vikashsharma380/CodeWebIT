@@ -1,26 +1,26 @@
 export const DOCUMENT_TYPES = {
   ADCA_CERTIFICATE: {
     key: "adca_certificate",
-    prefix: "ADCA-CERT",
+    prefix: "ADCACERT",
   },
 
   ADCA_MARKSHEET: {
     key: "adca_marksheet",
-    prefix: "ADCA-MARK",
+    prefix: "ADCAMARK",
   },
 
   TYPING_CERTIFICATE: {
     key: "typing_certificate",
-    prefix: "TYPING-CERT",
+    prefix: "TYPINGCERT",
   },
 
   INTERNSHIP_CERTIFICATE: {
     key: "internship_certificate",
-    prefix: "INT-CERT",
+    prefix: "INTCERT",
   },
 
   FULLSTACK_CERTIFICATE: {
     key: "fullstack_certificate",
-    prefix: "FS-CERT",
+    prefix: "FSCERT",
   },
 };
