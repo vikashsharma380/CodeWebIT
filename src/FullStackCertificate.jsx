@@ -2,6 +2,7 @@ import "./certificate.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef } from "react";
+import AdminNavbar from "./Admin/AdminNavbar";
 
 export default function Certificate() {
   const certRef = useRef();
@@ -40,6 +41,7 @@ export default function Certificate() {
 
   return (
     <>
+      <AdminNavbar />
       <div className="certificate-wrapper">
         {/* BUTTONS */}
         <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
@@ -112,9 +114,7 @@ export default function Certificate() {
             <div className="course-section">
               <div className="course-line">Has Completed the course of</div>
 
-              <div className="course-name">
-                Fullstack Web Development
-              </div>
+              <div className="course-name">Fullstack Web Development</div>
 
               <div className="course-duration">
                 (COURSE DURATION : 8 MONTHS)

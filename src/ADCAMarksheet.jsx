@@ -1,9 +1,10 @@
 import "./ADCAMarksheet.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { useRef,useState } from "react";
+import { useRef, useState } from "react";
 
 import { QRCodeCanvas } from "qrcode.react";
+import AdminNavbar from "./Admin/AdminNavbar";
 
 export default function Certificate() {
   const certRef = useRef();
@@ -21,51 +22,55 @@ export default function Certificate() {
     link.href = canvas.toDataURL("image/png");
     link.click();
   };
-const [subjects, setSubjects] = useState([
-  {
-    name: "Computer Fundamentals",
-    objOut: 100,
-    objScored: 0,
-    pracOut: 60,
-    pracScored: 0,
-  },
-]);
+  const [subjects, setSubjects] = useState([
+    {
+      name: "Computer Fundamentals",
+      objOut: 100,
+      objScored: 0,
+      pracOut: 60,
+      pracScored: 0,
+    },
+  ]);
 
-const addSubject = () => {
-  setSubjects([...subjects,{
-    name:"",
-    objOut:100,
-    objScored:0,
-    pracOut:60,
-    pracScored:0,
-  }]);
-};
+  const addSubject = () => {
+    setSubjects([
+      ...subjects,
+      {
+        name: "",
+        objOut: 100,
+        objScored: 0,
+        pracOut: 60,
+        pracScored: 0,
+      },
+    ]);
+  };
 
-const updateSubject = (i, field, val) => {
-  const s=[...subjects];
-  s[i][field]=field==="name"?val:Number(val);
-  setSubjects(s);
-};
+  const updateSubject = (i, field, val) => {
+    const s = [...subjects];
+    s[i][field] = field === "name" ? val : Number(val);
+    setSubjects(s);
+  };
 
-const removeSubject = (i) => {
-  setSubjects(subjects.filter((_,idx)=>idx!==i));
-};
-const totalOut = subjects.reduce(
-  (t,s)=>t+s.objOut+s.pracOut, 0
-);
+  const removeSubject = (i) => {
+    setSubjects(subjects.filter((_, idx) => idx !== i));
+  };
+  const totalOut = subjects.reduce((t, s) => t + s.objOut + s.pracOut, 0);
 
-const totalScored = subjects.reduce(
-  (t,s)=>t+s.objScored+s.pracScored, 0
-);
+  const totalScored = subjects.reduce(
+    (t, s) => t + s.objScored + s.pracScored,
+    0
+  );
 
-const percentage = totalOut
-  ? ((totalScored / totalOut) * 100).toFixed(2)
-  : 0;
+  const percentage = totalOut ? ((totalScored / totalOut) * 100).toFixed(2) : 0;
 
-const grade =
-  percentage >= 75 ? "A" :
-  percentage >= 60 ? "B" :
-  percentage >= 45 ? "C" : "FAIL";
+  const grade =
+    percentage >= 75
+      ? "A"
+      : percentage >= 60
+      ? "B"
+      : percentage >= 45
+      ? "C"
+      : "FAIL";
 
   // PDF DOWNLOAD
   const downloadPDF = async () => {
@@ -85,50 +90,50 @@ const grade =
   };
 
   const [form, setForm] = useState({
-  marksheetNo: "",       // backend se aayega
-  issueDate: "07 JAN 2025",
-  studentName: "VIKASH SHARMA",
-  fatherName: "RAJU SHARMA",
-  rollNo: "CWIT2025",
-  course: "ADCA",
-  year: "2025",
-  branch: "COMPUTER SCIENCE",
-  college: "CODE WEB IT",
-  session: "2024-2025",
-  photo: "/photo.jpg",
-});
-const saveMarksheet = async () => {
-  const res = await fetch("https://api.codewebit.com/api/documents", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ...form,
-      subjects,
-      totalOut,
-      totalScored,
-      percentage,
-      grade,
-      documentType: DOCUMENT_TYPE,
-    }),
+    marksheetNo: "", // backend se aayega
+    issueDate: "07 JAN 2025",
+    studentName: "VIKASH SHARMA",
+    fatherName: "RAJU SHARMA",
+    rollNo: "CWIT2025",
+    course: "ADCA",
+    year: "2025",
+    branch: "COMPUTER SCIENCE",
+    college: "CODE WEB IT",
+    session: "2024-2025",
+    photo: "/photo.jpg",
   });
+  const saveMarksheet = async () => {
+    const res = await fetch("https://api.codewebit.com/api/documents", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...form,
+        subjects,
+        totalOut,
+        totalScored,
+        percentage,
+        grade,
+        documentType: DOCUMENT_TYPE,
+      }),
+    });
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if (data.success) {
-    alert(`Marksheet No: ${data.documentNo}`);
-    setForm(prev => ({
-      ...prev,
-      marksheetNo: data.documentNo,
-    }));
-  }
-};
+    if (data.success) {
+      alert(`Marksheet No: ${data.documentNo}`);
+      setForm((prev) => ({
+        ...prev,
+        marksheetNo: data.documentNo,
+      }));
+    }
+  };
 
-
-const DOCUMENT_TYPE = "adca_marksheet";
-const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
+  const DOCUMENT_TYPE = "adca_marksheet";
+  const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
 
   return (
     <>
+      <AdminNavbar />
       {/* DOWNLOAD BUTTONS */}
       <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
         <button onClick={downloadPDF} style={btnStyle}>
@@ -138,47 +143,69 @@ const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
           Download PNG
         </button>
       </div>
-<div style={{ padding: 20, background: "#f5f5f5" }}>
-  <input value={form.studentName} onChange={e=>setForm({...form,studentName:e.target.value})} placeholder="Student Name" />
-  <input value={form.fatherName} onChange={e=>setForm({...form,fatherName:e.target.value})} placeholder="Father Name" />
-  <input value={form.rollNo} onChange={e=>setForm({...form,rollNo:e.target.value})} placeholder="Roll No" />
-  <input value={form.course} onChange={e=>setForm({...form,course:e.target.value})} placeholder="Course" />
-  <input value={form.year} onChange={e=>setForm({...form,year:e.target.value})} placeholder="Year" />
-  <input value={form.session} onChange={e=>setForm({...form,session:e.target.value})} placeholder="Session" />
-<input
-  value={form.branch}
-  onChange={e=>setForm({...form,branch:e.target.value})}
-  placeholder="Branch"
-/>
+      <div style={{ padding: 20, background: "#f5f5f5" }}>
+        <input
+          value={form.studentName}
+          onChange={(e) => setForm({ ...form, studentName: e.target.value })}
+          placeholder="Student Name"
+        />
+        <input
+          value={form.fatherName}
+          onChange={(e) => setForm({ ...form, fatherName: e.target.value })}
+          placeholder="Father Name"
+        />
+        <input
+          value={form.rollNo}
+          onChange={(e) => setForm({ ...form, rollNo: e.target.value })}
+          placeholder="Roll No"
+        />
+        <input
+          value={form.course}
+          onChange={(e) => setForm({ ...form, course: e.target.value })}
+          placeholder="Course"
+        />
+        <input
+          value={form.year}
+          onChange={(e) => setForm({ ...form, year: e.target.value })}
+          placeholder="Year"
+        />
+        <input
+          value={form.session}
+          onChange={(e) => setForm({ ...form, session: e.target.value })}
+          placeholder="Session"
+        />
+        <input
+          value={form.branch}
+          onChange={(e) => setForm({ ...form, branch: e.target.value })}
+          placeholder="Branch"
+        />
 
-<input
-  value={form.college}
-  onChange={e=>setForm({...form,college:e.target.value})}
-  placeholder="College"
-/>
+        <input
+          value={form.college}
+          onChange={(e) => setForm({ ...form, college: e.target.value })}
+          placeholder="College"
+        />
 
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e)=>{
-      const r=new FileReader();
-      r.onloadend=()=>setForm({...form,photo:r.result});
-      r.readAsDataURL(e.target.files[0]);
-    }}
-  />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const r = new FileReader();
+            r.onloadend = () => setForm({ ...form, photo: r.result });
+            r.readAsDataURL(e.target.files[0]);
+          }}
+        />
 
-  <button onClick={saveMarksheet}>Save Marksheet</button>
-  <button onClick={addSubject}>➕ Add Subject</button>
-  <button onClick={removeSubject}>❌ Remove Subject</button>
-
-</div>
+        <button onClick={saveMarksheet}>Save Marksheet</button>
+        <button onClick={addSubject}>➕ Add Subject</button>
+        <button onClick={removeSubject}>❌ Remove Subject</button>
+      </div>
 
       {/* CERTIFICATE */}
       <div className="certificate-wrapper">
         <div className="certificate" ref={certRef}>
           <div className="right-ribbon"></div>
 
-      
           <div className="content">
             {/* HEADER */}
             <div className="header">
@@ -194,28 +221,28 @@ const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
             {/* META */}
             <div className="meta">
               <div>
-               <strong>Marksheet No :</strong> {form.marksheetNo || "AUTO GENERATED"}
+                <strong>Marksheet No :</strong>{" "}
+                {form.marksheetNo || "AUTO GENERATED"}
               </div>
               <div>
-               <strong>Date :</strong> {form.issueDate}
+                <strong>Date :</strong> {form.issueDate}
               </div>
             </div>
 
             {/* INSTITUTE */}
             <div className="institute">
-            <div className="qr-box">
-  {form.marksheetNo && (
-    <QRCodeCanvas
-      value={qrValue}
-      size={90}
-      bgColor="#ffffff"
-      fgColor="#000000"
-      level="H"
-    />
-  )}
-  <div className="qr-text">Scan to Verify</div>
-</div>
-
+              <div className="qr-box">
+                {form.marksheetNo && (
+                  <QRCodeCanvas
+                    value={qrValue}
+                    size={90}
+                    bgColor="#ffffff"
+                    fgColor="#000000"
+                    level="H"
+                  />
+                )}
+                <div className="qr-text">Scan to Verify</div>
+              </div>
 
               <div className="institute-title">CODE WEB</div>
               <div className="institute-subtitle">INSTITUTE OF TECHNOLOGY</div>
@@ -225,16 +252,17 @@ const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
             </div>
 
             {/* STUDENT FORM (DESIGN SAME) */}
-            <div className="awarded-section" >
-              <div className="awarded-left" >
+            <div className="awarded-section">
+              <div className="awarded-left">
                 <p className="awarded-label">Student Details :</p>
- 
-                <div className="student-form" >
+
+                <div className="student-form">
                   <div>
                     <span>Name :</span> <strong>{form.studentName}</strong>
                   </div>
                   <div>
-                    <span>Father Name :</span> <strong>{form.fatherName}</strong>
+                    <span>Father Name :</span>{" "}
+                    <strong>{form.fatherName}</strong>
                   </div>
                   <div>
                     <span>Roll No :</span> <strong>{form.rollNo}</strong>
@@ -268,7 +296,10 @@ const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
 
             {/* MARKS TABLE */}
             <div className="result-section">
-              <table className="premium-marks-table" style={{fontSize:"16px"}}>
+              <table
+                className="premium-marks-table"
+                style={{ fontSize: "16px" }}
+              >
                 <thead>
                   <tr>
                     <th rowSpan="2" className="subject-col">
@@ -290,97 +321,110 @@ const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
                   </tr>
                 </thead>
 
-               <tbody>
-{subjects.map((s,i)=>(
-<tr key={i}>
-  <td>
-    <input
-      value={s.name}
-      onChange={e=>updateSubject(i,"name",e.target.value)}
-    />
-  </td>
+                <tbody>
+                  {subjects.map((s, i) => (
+                    <tr key={i}>
+                      <td>
+                        <input
+                          value={s.name}
+                          onChange={(e) =>
+                            updateSubject(i, "name", e.target.value)
+                          }
+                        />
+                      </td>
 
-  <td>
-    <input
-      type="number"
-      value={s.objOut}
-      onChange={e=>updateSubject(i,"objOut",e.target.value)}
-    />
-  </td>
+                      <td>
+                        <input
+                          type="number"
+                          value={s.objOut}
+                          onChange={(e) =>
+                            updateSubject(i, "objOut", e.target.value)
+                          }
+                        />
+                      </td>
 
-  <td>
-    <input
-      type="number"
-      value={s.objScored}
-      onChange={e=>updateSubject(i,"objScored",e.target.value)}
-    />
-  </td>
+                      <td>
+                        <input
+                          type="number"
+                          value={s.objScored}
+                          onChange={(e) =>
+                            updateSubject(i, "objScored", e.target.value)
+                          }
+                        />
+                      </td>
 
-  <td>
-    <input
-      type="number"
-      value={s.pracOut}
-      onChange={e=>updateSubject(i,"pracOut",e.target.value)}
-    />
-  </td>
+                      <td>
+                        <input
+                          type="number"
+                          value={s.pracOut}
+                          onChange={(e) =>
+                            updateSubject(i, "pracOut", e.target.value)
+                          }
+                        />
+                      </td>
 
-  <td>
-    <input
-      type="number"
-      value={s.pracScored}
-      onChange={e=>updateSubject(i,"pracScored",e.target.value)}
-    />
-  </td>
+                      <td>
+                        <input
+                          type="number"
+                          value={s.pracScored}
+                          onChange={(e) =>
+                            updateSubject(i, "pracScored", e.target.value)
+                          }
+                        />
+                      </td>
 
-  <td>{s.objOut + s.pracOut}</td>
-  <td>{s.objScored + s.pracScored}</td>
+                      <td>{s.objOut + s.pracOut}</td>
+                      <td>{s.objScored + s.pracScored}</td>
 
-  <td data-html2canvas-ignore="true" className="no-print">
- <button
-  type="button"
-  data-html2canvas-ignore="true"
-  onClick={() => removeSubject(i)}
-  style={{
-    background: "red",
-    color: "#fff",
-    border: "none",
-    padding: "4px 8px",
-    cursor: "pointer",
-  }}
->
-  ❌
-</button>
+                      <td data-html2canvas-ignore="true" className="no-print">
+                        <button
+                          type="button"
+                          data-html2canvas-ignore="true"
+                          onClick={() => removeSubject(i)}
+                          style={{
+                            background: "red",
+                            color: "#fff",
+                            border: "none",
+                            padding: "4px 8px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ❌
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
 
-
-</td>
-</tr>
-))}
-
-<tr>
-  <td><b>Total</b></td>
-  <td colSpan="4"></td>
-  <td><b>{totalOut}</b></td>
-  <td><b>{totalScored}</b></td>
-
-</tr>
-
-</tbody>
-
+                  <tr>
+                    <td>
+                      <b>Total</b>
+                    </td>
+                    <td colSpan="4"></td>
+                    <td>
+                      <b>{totalOut}</b>
+                    </td>
+                    <td>
+                      <b>{totalScored}</b>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
               <div style={{ marginTop: 15, textAlign: "center", fontSize: 20 }}>
-  <div style={{ fontSize: 16 }}>
-    <b>Percentage :</b> {percentage}%
-  </div>
+                <div style={{ fontSize: 16 }}>
+                  <b>Percentage :</b> {percentage}%
+                </div>
 
-  <div style={{ fontSize: 18, marginTop: 5 }}>
-    <b>Grade :</b> {grade}
-  </div>
-</div>
+                <div style={{ fontSize: 18, marginTop: 5 }}>
+                  <b>Grade :</b> {grade}
+                </div>
+              </div>
             </div>
 
             {/* FOOTER */}
             <div className="footer-section">
-              <div className="authorised" style={{fontSize:"20px"}}>at our authorised study centre</div>
+              <div className="authorised" style={{ fontSize: "20px" }}>
+                at our authorised study centre
+              </div>
 
               <div className="footer-logos">
                 <img src="/logo1.png" alt="ISO" />
@@ -400,13 +444,16 @@ const qrValue = `https://codewebit.com/verify?marksheet=${form.marksheetNo}`;
                 </div>
               </div>
 
-              <div className="verification" style={{fontSize:"20px"}}>
+              <div className="verification" style={{ fontSize: "20px" }}>
                 Online certificate Verification Available on:
                 <br />
                 <strong>codewebit.com</strong>
               </div>
 
-              <div className="address" style={{ marginBottom: "20px" ,fontSize:"20px"}}>
+              <div
+                className="address"
+                style={{ marginBottom: "20px", fontSize: "20px" }}
+              >
                 H.O. : MOTIHARI, EAST CHAMPARAN BIHAR, 845401 <br />
                 ADDRESS : BALUA, RAGHUNATHPUR
               </div>

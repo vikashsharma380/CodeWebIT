@@ -6,6 +6,7 @@ import ADCAMarksheet from "../src/ADCAMarksheet";
 import InternshipCertificate from "../src/InternshipCertificate";
 import FullStackCertificate from "../src/FullStackCertificate";
 import CertificatesList from "./Admin/CertificatesList";
+import AdminNavbar from "./Admin/AdminNavbar";
 
 export default function Certificates() {
   const [selected, setSelected] = useState(null);
@@ -28,21 +29,27 @@ export default function Certificates() {
   if (selected === "list")
     return <CertificatesList goBack={() => setSelected(null)} />;
 
-  
-
   return (
-    <div className="min-h-screen bg-slate-50 p-10">
-      <h1 className="text-3xl font-bold mb-8 text-center">
-        Download Certificates
-      </h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <div className="min-h-screen p-10 bg-slate-50">
+      <div className="grid max-w-5xl grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-3">
         <Card title="ADCA CERTIFICATE" onClick={() => setSelected("adca")} />
         <Card title="ADCA MARKSHEET" onClick={() => setSelected("marksheet")} />
-        <Card title="TYPING CERTIFICATE" onClick={() => setSelected("typing")} />
-        <Card title="INTERNSHIP CERTIFICATE" onClick={() => setSelected("internship")} />
-     <Card title={"LIST OF CERTIFICATES"} onClick={() => setSelected("list")} />
-        <Card title="FULL STACK CERTIFICATE" onClick={() => setSelected("fullstack")} />
+        <Card
+          title="TYPING CERTIFICATE"
+          onClick={() => setSelected("typing")}
+        />
+        <Card
+          title="INTERNSHIP CERTIFICATE"
+          onClick={() => setSelected("internship")}
+        />
+        <Card
+          title={"LIST OF CERTIFICATES"}
+          onClick={() => setSelected("list")}
+        />
+        <Card
+          title="FULL STACK CERTIFICATE"
+          onClick={() => setSelected("fullstack")}
+        />
       </div>
     </div>
   );
@@ -50,14 +57,15 @@ export default function Certificates() {
 
 function Card({ title, onClick }) {
   return (
-    <div
-      onClick={onClick}
-      className="cursor-pointer rounded-xl border p-6 text-center bg-white hover:shadow-md"
-    >
-      <h2 className="text-lg font-semibold">{title}</h2>
-      <p className="text-sm text-slate-500 mt-2">
-        Click to view & download
-      </p>
-    </div>
+    <>
+      <AdminNavbar />
+      <div
+        onClick={onClick}
+        className="p-6 text-center bg-white border cursor-pointer rounded-xl hover:shadow-md"
+      >
+        <h2 className="text-lg font-semibold">{title}</h2>
+        <p className="mt-2 text-sm text-slate-500">Click to view & download</p>
+      </div>{" "}
+    </>
   );
 }

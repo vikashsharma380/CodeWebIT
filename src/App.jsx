@@ -34,11 +34,6 @@ import CertificatesList from "./Admin/CertificatesList";
 const AppContent = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
-  const hideWebsiteLayoutRoutes = ["/certificate"];
-
-  const hideWebsiteLayout = hideWebsiteLayoutRoutes.includes(
-    location.pathname
-  );
 
   return (
     <div className="flex flex-col min-h-screen antialiased text-secondary bg-background">
@@ -107,12 +102,7 @@ const AppContent = () => {
               </AdminRoute>
             }
           />
-         <Route
-  path="/verify"
-  element={<Verification />}
-/>
-
-     
+          <Route path="/verify" element={<Verification />} />
 
           <Route
             path="/admin/marksheet-verification"
@@ -140,16 +130,14 @@ const AppContent = () => {
             }
           />
 
-
           <Route
-  path="/admin/certificates"
-  element={
-    <AdminRoute>
-      <CertificatesList />
-    </AdminRoute>
-  }
-/>
-
+            path="/admin/certificates"
+            element={
+              <AdminRoute>
+                <CertificatesList />
+              </AdminRoute>
+            }
+          />
         </Routes>
       </main>
 
