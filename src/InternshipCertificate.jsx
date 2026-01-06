@@ -126,36 +126,7 @@ export default function Certificate() {
             </div>
             {/* ===== STEP-5 : COURSE DETAILS END ===== */}
             {/* ===== STEP-6 : TYPING RESULT TABLE START ===== */}
-            <div className="result-section">
-              <div className="result-title">
-                Has passed the prescribed examination with
-              </div>
-
-              <table className="result-table">
-                <thead>
-                  <tr>
-                    <th>Subject</th>
-                    <th>Speed (WPM)</th>
-                    <th>Obtained</th>
-                    <th>Accuracy (%)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Hindi Typing</td>
-                    <td>30 WPM</td>
-                    <td></td>
-                    <td>99%</td>
-                  </tr>
-                  <tr>
-                    <td>English Typing</td>
-                    <td>45 WPM</td>
-                    <td></td>
-                    <td>100%</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          
             {/* ===== STEP-6 : TYPING RESULT TABLE END ===== */}
             {/* ===== STEP-7 : FOOTER START ===== */}
             <div className="footer-section">
