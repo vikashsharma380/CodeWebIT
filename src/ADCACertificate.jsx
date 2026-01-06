@@ -6,7 +6,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import { px } from "framer-motion";
 import AdminNavbar from "./Admin/AdminNavbar";
 
-export default function Certificate() {
+export default function   Certificate() {
   const certRef = useRef();
   const [form, setForm] = useState({
     certificateNo: "", // backend se aayega
@@ -151,17 +151,18 @@ export default function Certificate() {
         />
 
         <button onClick={saveCertificate}>Save Certificate</button>
-      </div>
-      <div className="certificate-wrapper">
-        {/* BUTTONS */}
-        <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
-          <button onClick={downloadPDF} style={btnStyle}>
+  
+          <button onClick={downloadPDF} style={{...btnStyle, marginLeft:10}}>
             Download PDF
           </button>
           <button onClick={downloadPNG} style={{ ...btnStyle, marginLeft: 10 }}>
             Download PNG
           </button>
-        </div>
+       
+      </div>
+      <div className="certificate-wrapper">
+        {/* BUTTONS */}
+        
 
         {/* CERTIFICATE */}
         <div className="certificate" ref={certRef}>
@@ -335,7 +336,7 @@ export default function Certificate() {
   );
 }
 const btnStyle = {
-  padding: "10px 20px",
+  padding: "2px 4px",
   background: "#1a237e",
   color: "#fff",
   borderRadius: "6px",

@@ -133,14 +133,7 @@ export default function Certificate() {
     <>
       <AdminNavbar />
       {/* DOWNLOAD BUTTONS */}
-      <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
-        <button onClick={downloadPDF} style={btnStyle}>
-          Download PDF
-        </button>
-        <button onClick={downloadPNG} style={{ ...btnStyle, marginLeft: 10 }}>
-          Download PNG
-        </button>
-      </div>
+      
       <div style={{ padding: 20, background: "#f5f5f5" }}>
         <input
           value={form.studentName}
@@ -196,7 +189,15 @@ export default function Certificate() {
 
         <button onClick={saveMarksheet}>Save Marksheet</button>
         <button onClick={addSubject}>➕ Add Subject</button>
-        <button onClick={removeSubject}>❌ Remove Subject</button>
+        <button onClick={removeSubject}>❌ Remove Subject</button>  
+
+        <button onClick={downloadPDF} style={{ ...btnStyle, marginLeft: 20 }}>
+          Download PDF
+        </button>
+        <button onClick={downloadPNG} style={{ ...btnStyle, marginLeft: 20 }}>
+          Download PNG
+        </button>
+        
       </div>
 
       {/* CERTIFICATE */}
@@ -460,7 +461,7 @@ export default function Certificate() {
 }
 
 const btnStyle = {
-  padding: "10px 20px",
+  padding: "2px 4px",
   background: "#1a237e",
   color: "#fff",
   borderRadius: "6px",
