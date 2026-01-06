@@ -3,6 +3,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef, useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
+import { px } from "framer-motion";
 
 export default function Certificate() {
   const certRef = useRef();
@@ -124,6 +125,7 @@ const saveCertificate = async () => {
 
 
   <button onClick={saveCertificate}>Save Certificate</button>
+  
 </div>
 
       <div className="certificate-wrapper">
@@ -145,8 +147,7 @@ const saveCertificate = async () => {
           {/* RIGHT RIBBON (Yellow) */}
           <div className="right-ribbon"></div>
 
-          <img src="/waxseal.png" alt="Wax Seal" className="wax-seal-img" />
-
+    
           {/* MAIN CONTENT AREA */}
           <div className="content">
             {/* ===== MSME HEADER START ===== */}
@@ -162,11 +163,11 @@ const saveCertificate = async () => {
             </div>
 
             <div className="meta">
-              <div>
+              <div style={{fontSize:"20px"}}>
                <strong>Certificate Number :</strong> {form.certificateNo}
 
               </div>
-              <div>
+              <div style={{fontSize:"20px"}}>
                <strong>Date of Issue :</strong> {form.issueDate}
 
               </div>
@@ -198,8 +199,8 @@ const saveCertificate = async () => {
             {/* ===== STEP-4 : AWARDED TO SECTION START ===== */}
             <div className="awarded-section">
               {/* LEFT TEXT */}
-              <div className="awarded-left">
-                <p className="awarded-label">
+              <div className="awarded-left" style={{fontSize: "20px"}}>
+                <p className="awarded-label" style={{fontSize:"20px"}}>
                   This certificate is awarded to :
                 </p>
                 <div className="student-name">
@@ -221,28 +222,28 @@ S/O Mr. {form.fatherName || "FATHER NAME"}
             </div>
             {/* ===== STEP-4 : AWARDED TO SECTION END ===== */}
             {/* ===== STEP-5 : COURSE DETAILS START ===== */}
-            <div className="course-section">
-              <div className="course-line">Has Completed the course of</div>
+            <div className="course-section" style={{marginLeft:"80px"}} >
+              <div className="course-line" style={{fontSize: "20px"}}>Has Completed the course of</div>
 
-              <div className="course-name">
+              <div className="course-name" >
                {form.courseName || "COURSE NAME"}
 
               </div>
 
-              <div className="course-duration">
+              <div className="course-duration" style={{fontSize: "20px"}}>
               (COURSE DURATION : {form.courseDuration || "DURATION"})
 
               </div>
 
-              <div className="course-period">
+              <div className="course-period" style={{fontSize: "20px"}}>
                (COURSE PERIOD : {form.coursePeriod || "PERIOD"})
 
               </div>
             </div>
             {/* ===== STEP-5 : COURSE DETAILS END ===== */}
             {/* ===== STEP-6 : TYPING RESULT TABLE START ===== */}
-            <div className="result-section">
-              <div className="result-title">
+            <div className="result-section" style={{marginLeft:"80px"}}>
+              <div className="result-title" style={{fontSize: "20px"}}>
                 Has passed the prescribed examination with
               </div>
                 <div className="result-title">
@@ -278,9 +279,9 @@ S/O Mr. {form.fatherName || "FATHER NAME"}
             {/* ===== STEP-6 : TYPING RESULT TABLE END ===== */}
             {/* ===== STEP-7 : FOOTER START ===== */}
             <div className="footer-section">
-              <div className="authorised">at our authorised study centre</div>
+              <div className="authorised" >at our authorised study centre</div>
 
-              <div className="footer-logos">
+              <div className="footer-logos" style={{marginBottom:"80px"}}>
                 <img src="/logo1.png" alt="ISO" />
                 <img src="/logo1.png" alt="IAF" />
               </div>
@@ -298,20 +299,20 @@ S/O Mr. {form.fatherName || "FATHER NAME"}
                 </div>
               </div>
 
-              <div className="verification">
+              <div className="verification" style={{ fontSize: "20px" }}>
                 Online certificate Verification Available on:
                 <br />
                 <strong>codewebit.com</strong>
               </div>
 
-              <div className="address">
+              <div className="address" style={{ fontSize: "20px",marginBottom:"20px" }}>
                 H.O. : MOTIHARI, EAST CHAMPARAN BIHAR, 845401 <br />
                 ADDRESS : BALUA, RAGHUNATHPUR
               </div>
             </div>
             {/* ===== STEP-7 : FOOTER END ===== */}
           </div>
-        </div>
+        </div> 
       </div>{" "}
     </>
   );
