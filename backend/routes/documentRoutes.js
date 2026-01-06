@@ -113,5 +113,12 @@ router.get("/verify/:certificateNo", async (req, res) => {
 });
 
 
+router.get("/verify/marksheet", async (req,res)=>{
+  const ms = await Marksheet.findOne({ marksheetNo: req.query.no });
+  if(!ms) return res.json({ verified:false });
+  res.json({ verified:true, data: ms });
+});
+
+
 
 export default router;
