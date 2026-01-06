@@ -21,9 +21,11 @@
 .certificate {
   position: relative;
   background: #fff;
-  border: 6px solid #c7a548;
+  border: 6px solid #82b3f4;
 }
-
+.ADCAcert{
+  border: 6px solid #f4d182;
+}
 .certificate::after {
   content: "";
   position: absolute;
@@ -53,7 +55,10 @@
   right: 0;
   width: 160px;
   height: 50%;
-  background: #f5c84c;
+  background: #82b3f4;
+}
+.ADCAcertRibon{
+  background: #f4d182;
 }
 .watermark {
   position: absolute;

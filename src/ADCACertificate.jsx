@@ -154,9 +154,9 @@ export default function   Certificate() {
       </div>
       <div className="certificate-wrapper">
         {/* CERTIFICATE */}
-        <div className="certificate" ref={certRef}>
+        <div className="certificate ADCAcert"  ref={certRef}>
           {/* RIGHT RIBBON (Yellow) */}
-          <div className="right-ribbon"></div>
+          <div className="right-ribbon ADCAcertRibon" ></div>
 
           {/* MAIN CONTENT AREA */}
           <div className="content">
