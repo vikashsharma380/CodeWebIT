@@ -98,30 +98,40 @@ const grade =
   photo: "/photo.jpg",
 });
 const saveMarksheet = async () => {
-  const res = await fetch("https://api.codewebit.com/api/documents", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ...form,
-      subjects,
-      totalOut,
-      totalScored,
-      percentage,
-      grade,
-      documentType: DOCUMENT_TYPE,
-    }),
-  });
+  try {
+    const res = await fetch(
+      "https://api.codewebit.com/api/marksheets", // ✅ CORRECT API
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          subjects,
+          totalOut,
+          totalScored,
+          percentage,
+          grade,
+        }),
+      }
+    );
 
-  const data = await res.json();
+    const data = await res.json();
 
-  if (data.success) {
-    alert(`Marksheet No: ${data.documentNo}`);
-    setForm(prev => ({
-      ...prev,
-      marksheetNo: data.documentNo,
-    }));
+    if (data.success) {
+      alert(`Marksheet No: ${data.marksheetNo}`);
+      setForm(prev => ({
+        ...prev,
+        marksheetNo: data.marksheetNo,
+      }));
+    } else {
+      alert("Failed to save marksheet");
+    }
+  } catch (err) {
+    console.error("Save Marksheet Error:", err);
+    alert("Server error");
   }
 };
+
 
 
 const DOCUMENT_TYPE = "adca_marksheet";
