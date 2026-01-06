@@ -34,16 +34,18 @@ import CertificatesList from "./Admin/CertificatesList";
 const AppContent = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const hideWebsiteHeader =
+    location.pathname.startsWith("/admin") ||
+    location.pathname === "/certificate";
 
   return (
     <div className="flex flex-col min-h-screen antialiased text-secondary bg-background">
       {/* ✅ WEBSITE HEADER */}
-      {!isAdminRoute && <Header />}
+      {!hideWebsiteHeader && <Header />}
 
       {/* ✅ ADMIN NAVBAR (STICKY & ALWAYS VISIBLE) */}
-      {isAdminRoute && <AdminNavbar />}
-
-      <main className={`flex-grow ${isAdminRoute ? "pt-28" : ""}`}>
+      {hideWebsiteHeader && <AdminNavbar />}
+      <main className={`flex-grow ${hideWebsiteHeader ? "pt-28" : ""}`}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/courses" element={<CoursesPage />} />
@@ -142,7 +144,7 @@ const AppContent = () => {
       </main>
 
       {/* ✅ WEBSITE FOOTER */}
-      {!isAdminRoute && <Footer />}
+      {!hideWebsiteHeader && <Footer />}
     </div>
   );
 };
