@@ -2,6 +2,7 @@ import "./certificate.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef } from "react";
+import AdminNavbar from "./Admin/AdminNavbar";
 
 export default function Certificate() {
   const certRef = useRef();
@@ -40,6 +41,7 @@ export default function Certificate() {
 
   return (
     <>
+      <AdminNavbar />
       <div className="certificate-wrapper">
         {/* BUTTONS */}
         <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
@@ -56,8 +58,6 @@ export default function Certificate() {
           {/* RIGHT RIBBON (Yellow) */}
           <div className="right-ribbon"></div>
 
-        
-
           {/* MAIN CONTENT AREA */}
           <div className="content">
             {/* ===== MSME HEADER START ===== */}
@@ -73,10 +73,10 @@ export default function Certificate() {
             </div>
 
             <div className="meta">
-              <div style={{fontSize:"20px"}}>
+              <div style={{ fontSize: "20px" }}>
                 <strong>Certificate Number :</strong> CWIT-2025-001
               </div>
-              <div style={{fontSize:"20px"}}>
+              <div style={{ fontSize: "20px" }}>
                 <strong>Date of Issue :</strong> 07 JAN 2025
               </div>
             </div>
@@ -85,7 +85,7 @@ export default function Certificate() {
             <div className="institute">
               <div className="institute-title">CODE WEB</div>
               <div className="institute-subtitle">INSTITUTE OF TECHNOLOGY</div>
-              <div className="institute-iso" style={{fontSize:"20px"}}>
+              <div className="institute-iso" style={{ fontSize: "20px" }}>
                 An ISO 9001:2015 Certified Organization
               </div>
             </div>
@@ -94,7 +94,7 @@ export default function Certificate() {
             <div className="awarded-section">
               {/* LEFT TEXT */}
               <div className="awarded-left">
-                <p className="awarded-label" style={{fontSize:"20px"}}>
+                <p className="awarded-label" style={{ fontSize: "20px" }}>
                   This certificate is awarded to :
                 </p>
                 <div className="student-name">
@@ -109,29 +109,31 @@ export default function Certificate() {
             </div>
             {/* ===== STEP-4 : AWARDED TO SECTION END ===== */}
             {/* ===== STEP-5 : COURSE DETAILS START ===== */}
-            <div className="course-section" >
-              <div className="course-line" style={{fontSize:"20px"}}>Has Completed the course of</div>
+            <div className="course-section">
+              <div className="course-line" style={{ fontSize: "20px" }}>
+                Has Completed the course of
+              </div>
 
-              <div className="course-name" >
+              <div className="course-name">
                 COMPUTER TYPING IN HINDI & ENGLISH
               </div>
 
-              <div className="course-duration" style={{fontSize:"20px"}}>
+              <div className="course-duration" style={{ fontSize: "20px" }}>
                 (COURSE DURATION : 6 MONTHS)
               </div>
 
-              <div className="course-period" style={{fontSize:"20px"}}>
+              <div className="course-period" style={{ fontSize: "20px" }}>
                 (COURSE PERIOD : 07 JAN 2024 TO 06 JUL 2025)
               </div>
             </div>
             {/* ===== STEP-5 : COURSE DETAILS END ===== */}
             {/* ===== STEP-6 : TYPING RESULT TABLE START ===== */}
             <div className="result-section">
-              <div className="result-title" style={{fontSize:"20px"}}>
+              <div className="result-title" style={{ fontSize: "20px" }}>
                 Has passed the prescribed examination with
               </div>
 
-              <table className="result-table" style={{fontSize:"20px"}}>
+              <table className="result-table" style={{ fontSize: "20px" }}>
                 <thead>
                   <tr>
                     <th>Subject</th>
@@ -158,24 +160,34 @@ export default function Certificate() {
             </div>
             {/* ===== STEP-6 : TYPING RESULT TABLE END ===== */}
             {/* ===== STEP-7 : FOOTER START ===== */}
-            <div className="footer-section" style={{fontSize:"20px"}}>
-              <div className="authorised" style={{fontSize:"20px"}}>at our authorised study centre</div>
+            <div className="footer-section" style={{ fontSize: "20px" }}>
+              <div className="authorised" style={{ fontSize: "20px" }}>
+                at our authorised study centre
+              </div>
 
               <div className="footer-logos">
                 <img src="/logo1.png" alt="ISO" />
                 <img src="/logo1.png" alt="IAF" />
               </div>
               <div className="signatures">
-                <div className="sign-box" >
-                  <div className="sign-text" style={{fontSize:"20px"}}>Deepak Gupta</div>
+                <div className="sign-box">
+                  <div className="sign-text" style={{ fontSize: "20px" }}>
+                    Deepak Gupta
+                  </div>
                   <div className="sign-line"></div>
-                  <div className="sign-label" style={{fontSize:"12px"}}>MANAGING DIRECTOR</div>
+                  <div className="sign-label" style={{ fontSize: "12px" }}>
+                    MANAGING DIRECTOR
+                  </div>
                 </div>
 
                 <div className="sign-box exam">
-                  <div className="sign-text" style={{fontSize:"20px"}}>Hasnain Ansari</div>
+                  <div className="sign-text" style={{ fontSize: "20px" }}>
+                    Hasnain Ansari
+                  </div>
                   <div className="sign-line"></div>
-                  <div className="sign-label" style={{fontSize:"12px"}}>EXAMINATION CONTROLLER</div>
+                  <div className="sign-label" style={{ fontSize: "12px" }}>
+                    EXAMINATION CONTROLLER
+                  </div>
                 </div>
               </div>
 
@@ -185,7 +197,10 @@ export default function Certificate() {
                 <strong>codewebit.com</strong>
               </div>
 
-              <div className="address" style={{marginBottom:"110px", fontSize:"20px"}}>
+              <div
+                className="address"
+                style={{ marginBottom: "110px", fontSize: "20px" }}
+              >
                 H.O. : MOTIHARI, EAST CHAMPARAN BIHAR, 845401 <br />
                 ADDRESS : BALUA, RAGHUNATHPUR
               </div>
