@@ -91,14 +91,12 @@ export default function Certificate() {
 
   const [form, setForm] = useState({
     marksheetNo: "", // backend se aayega
-    issueDate: "07 JAN 2025",
-    studentName: "VIKASH SHARMA",
-    fatherName: "RAJU SHARMA",
-    rollNo: "CWIT2025",
-    course: "ADCA",
-    year: "2025",
-    branch: "COMPUTER SCIENCE",
-    college: "CODE WEB IT",
+    issueDate: "",
+    studentName: "",
+    fatherName: "",
+    rollNo: "",
+    course: "",
+    year: "",
     session: "2024-2025",
     photo: "/photo.jpg",
   });
@@ -270,18 +268,14 @@ export default function Certificate() {
                   <div>
                     <span>Course :</span> <strong>{form.course}</strong>
                   </div>
-                  <div>
-                    <span>Branch :</span> <strong>{form.branch}</strong>
-                  </div>
+                  
                   <div>
                     <span>Year :</span> <strong>{form.year}</strong>
                   </div>
                   <div>
                     <span>Session :</span> <strong>{form.session}</strong>
                   </div>
-                  <div>
-                    <span>College :</span> <strong>{form.college}</strong>
-                  </div>
+                 
                 </div>
               </div>
 

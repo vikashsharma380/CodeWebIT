@@ -464,3 +464,79 @@ filter:
 .premium-marks-table th {
   vertical-align: middle;
 }
+
+
+/* ===== TOP MARKSHEET INPUT STRIP ===== */
+.marksheet-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #f9f9f9;
+  border-bottom: 2px solid #000;
+  flex-wrap: wrap;
+}
+
+/* TEXT-LIKE INPUT */
+.ms-input {
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 2px 4px;
+  min-width: 120px;
+}
+
+.ms-input.small { min-width: 90px; }
+.ms-input.tiny  { min-width: 60px; }
+.ms-input.large { min-width: 180px; }
+
+.ms-input:focus {
+  outline: none;
+  border-bottom: 2px solid #1a237e;
+}
+
+/* RIGHT SIDE ACTIONS */
+.ms-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* FILE BUTTON */
+.file-btn {
+  background: #e0e0e0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* BUTTONS */
+.btn {
+  border: none;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn.save { background: #1a237e; color: #fff; }
+.btn.add { background: #2e7d32; color: #fff; }
+.btn.remove { background: #c62828; color: #fff; }
+
+/* PRINT CLEAN */
+@media print {
+  .marksheet-topbar {
+    background: transparent;
+    border: none;
+  }
+  .btn, .file-btn {
+    display: none;
+  }
+  .ms-input {
+    border: none;
+  }
+}
