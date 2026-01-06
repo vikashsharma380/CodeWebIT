@@ -134,15 +134,7 @@ export default function Certificate() {
   return (
     <>
       <AdminNavbar />
-      {/* DOWNLOAD BUTTONS */}
-      <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
-        <button onClick={downloadPDF} style={btnStyle}>
-          Download PDF
-        </button>
-        <button onClick={downloadPNG} style={{ ...btnStyle, marginLeft: 10 }}>
-          Download PNG
-        </button>
-      </div>
+
       <div style={{ padding: 20, background: "#f5f5f5" }}>
         <input
           value={form.studentName}
@@ -460,6 +452,15 @@ export default function Certificate() {
             </div>
           </div>
         </div>
+      </div>
+      {/* DOWNLOAD BUTTONS - BOTTOM */}
+      <div className="download-actions">
+        <button onClick={downloadPDF} className="download-btn">
+          Download PDF
+        </button>
+        <button onClick={downloadPNG} className="download-btn outline">
+          Download PNG
+        </button>
       </div>
     </>
   );

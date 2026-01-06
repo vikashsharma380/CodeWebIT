@@ -43,16 +43,6 @@ export default function Certificate() {
     <>
       <AdminNavbar />
       <div className="certificate-wrapper">
-        {/* BUTTONS */}
-        <div style={{ position: "fixed", top: 20, right: 20, zIndex: 9999 }}>
-          <button onClick={downloadPDF} style={btnStyle}>
-            Download PDF
-          </button>
-          <button onClick={downloadPNG} style={{ ...btnStyle, marginLeft: 10 }}>
-            Download PNG
-          </button>
-        </div>
-
         {/* CERTIFICATE */}
         <div className="certificate" ref={certRef}>
           {/* RIGHT RIBBON (Yellow) */}
@@ -209,6 +199,15 @@ export default function Certificate() {
           </div>
         </div>
       </div>{" "}
+      {/* DOWNLOAD BUTTONS - BOTTOM */}
+      <div className="download-actions">
+        <button onClick={downloadPDF} className="download-btn">
+          Download PDF
+        </button>
+        <button onClick={downloadPNG} className="download-btn outline">
+          Download PNG
+        </button>
+      </div>
     </>
   );
 }
