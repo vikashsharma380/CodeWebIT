@@ -5,11 +5,10 @@
   background-image: url("/logo.png");
   background-repeat: repeat;
   background-size: 120px 120px;
-  opacity: 0.1;               
+  opacity: 0.1;
   z-index: 0;
   pointer-events: none;
 }
-
 
 .certificate-wrapper {
   background: #f2f2f2;
@@ -33,14 +32,12 @@
   pointer-events: none;
 }
 
-
-
 .certificate {
   width: 1080px;
   height: 1527px;
   background: #ffffff;
   position: relative;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   font-family: "Times New Roman", serif;
 }
@@ -69,7 +66,6 @@
   width: 900px;
 }
 
-
 /* Content padding */
 .content {
   position: relative;
@@ -80,12 +76,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-right: 180px; 
+  padding-right: 180px;
 }
 .header-right img {
   height: 60px;
 }
-
 
 .header-left {
   display: flex;
@@ -233,14 +228,12 @@
   font-size: 18px;
 }
 
-
 .footer-logos {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-bottom: 40px;   /* 🔥 important */
+  margin-bottom: 40px; /* 🔥 important */
 }
-
 
 .footer-logos img {
   height: 80px;
@@ -249,31 +242,23 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin: 0 360px 40px 20px; 
- 
+  margin: 0 360px 40px 20px;
 }
-
-
-
 
 .sign-box {
-  width: 220px;          /* 🔥 corner control */
+  width: 220px; /* 🔥 corner control */
   text-align: center;
-  
 }
-
 
 .sign-box.exam {
-  margin-left: auto;     /* 🔥 pushes it to extreme right */
+  margin-left: auto; /* 🔥 pushes it to extreme right */
   text-align: center;
 }
-
 
 .verification {
   margin-top: 20px;
   margin-bottom: 14px;
 }
-
 
 .address {
   margin-top: 12px;
@@ -326,35 +311,27 @@
   margin: 0;
 }
 
-
 .wax-seal-img {
   position: absolute;
-  bottom: 100px;     /* 👈 text se thoda upar */
-  right: 50px;      /* 👈 ribbon se safe distance */
+  bottom: 100px; /* 👈 text se thoda upar */
+  right: 50px; /* 👈 ribbon se safe distance */
   width: 250px;
   height: auto;
   z-index: 6;
 
-filter:
-    brightness(0.8)     /* thoda dark */
-    contrast(2)       /* stamp clarity */
-    saturate(1.)        /* red thoda deep */
-    drop-shadow(0 2px 3px rgba(0,0,0,0.35));
-  
-  
+  filter: brightness(0.8) /* thoda dark */ contrast(2) /* stamp clarity */
+    saturate(1) /* red thoda deep */ drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
 }
 .wax-seal-img {
   transform: rotate(18deg);
-
 }
-
 
 .qr-box {
   position: absolute;
-  top: -10px;        /* institute se thoda upar */
-  left: 0;           /* 👈 LEFT SIDE */
+  top: -10px; /* institute se thoda upar */
+  left: 0; /* 👈 LEFT SIDE */
   text-align: center;
-  z-index: 6;        /* watermark se upar */
+  z-index: 6; /* watermark se upar */
 }
 
 .qr-box img {
@@ -368,4 +345,30 @@ filter:
   color: #444;
 }
 
+.download-actions {
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
 
+.download-btn {
+  padding: 12px 26px;
+  background: #1a237e;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.download-btn.outline {
+  background: transparent;
+  color: #1a237e;
+  border: 2px solid #1a237e;
+}
+
+.download-btn:hover {
+  opacity: 0.9;
+}
